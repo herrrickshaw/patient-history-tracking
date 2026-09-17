@@ -23,6 +23,18 @@ VITAL_KEYS = list(TRACKS.values())
 
 SAMPLE_INTERVAL_SEC = 1
 
+# Physiologically-plausible bounds per vital. VitalDB's Solar8000/BT
+# (temperature) track has probe-dropout stretches -- confirmed across
+# every case sampled, not just this one -- where the raw reading falls
+# to single digits or high teens Celsius, which isn't a real living
+# patient's temperature. Masking those to "no reading" (rather than
+# forward-filling a fabricated hypothermia alarm) mirrors how a real
+# monitor holds the last good reading, or shows a probe fault, instead
+# of reporting garbage as a vital sign.
+PLAUSIBLE_RANGES: dict[str, tuple[float, float]] = {
+    "TEMP": (30.0, 42.0),
+}
+
 # High-resolution waveform tracks, loaded lazily per bed only when its
 # detail view is opened -- these are much larger than the numerics.
 WAVEFORM_TRACKS = {
@@ -45,6 +57,7 @@ class BedSource:
         self.bed_id = bed_id
         self.case_id = case_id
         raw = vitaldb.load_case(case_id, TRACK_NAMES, interval=SAMPLE_INTERVAL_SEC)
+        raw = _mask_implausible(raw, VITAL_KEYS)
         self.series = _forward_fill(raw)
         self.length = len(self.series)
         self.waveform: np.ndarray | None = None
@@ -79,6 +92,18 @@ class BedSource:
             key: [None if np.isnan(v) else round(float(v), 4) for v in chunk[:, i]]
             for i, key in enumerate(WAVEFORM_KEYS)
         }
+
+
+def _mask_implausible(arr: np.ndarray, keys: list[str]) -> np.ndarray:
+    masked = arr.copy()
+    for col, key in enumerate(keys):
+        bounds = PLAUSIBLE_RANGES.get(key)
+        if bounds is None:
+            continue
+        lo, hi = bounds
+        out_of_range = (masked[:, col] < lo) | (masked[:, col] > hi)
+        masked[out_of_range, col] = np.nan
+    return masked
 
 
 def _forward_fill(arr: np.ndarray) -> np.ndarray:
