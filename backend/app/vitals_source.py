@@ -23,6 +23,16 @@ VITAL_KEYS = list(TRACKS.values())
 
 SAMPLE_INTERVAL_SEC = 1
 
+# High-resolution waveform tracks, loaded lazily per bed only when its
+# detail view is opened -- these are much larger than the numerics.
+WAVEFORM_TRACKS = {
+    "SNUADC/ECG_II": "ECG",
+    "SNUADC/PLETH": "PLETH",
+}
+WAVEFORM_TRACK_NAMES = list(WAVEFORM_TRACKS.keys())
+WAVEFORM_KEYS = list(WAVEFORM_TRACKS.values())
+WAVEFORM_HZ = 100
+
 
 class BedSource:
     """Replays one VitalDB case's numeric vitals as a fixed-interval series.
@@ -37,10 +47,31 @@ class BedSource:
         raw = vitaldb.load_case(case_id, TRACK_NAMES, interval=SAMPLE_INTERVAL_SEC)
         self.series = _forward_fill(raw)
         self.length = len(self.series)
+        self.waveform: np.ndarray | None = None
+        self.waveform_length = 0
 
     def tick(self, t: int) -> dict[str, float | None]:
         row = self.series[t % self.length]
         return {key: (None if np.isnan(v) else round(float(v), 1)) for key, v in zip(VITAL_KEYS, row)}
+
+    def ensure_waveform_loaded(self) -> None:
+        if self.waveform is not None:
+            return
+        raw = vitaldb.load_case(self.case_id, WAVEFORM_TRACK_NAMES, interval=1 / WAVEFORM_HZ)
+        self.waveform = _forward_fill(raw)
+        self.waveform_length = len(self.waveform)
+
+    def waveform_window(self, sim_t_start: int, sim_t_end: int) -> dict[str, list[float | None]]:
+        """Samples for sim-time half-open interval [sim_t_start, sim_t_end), wrapped to the case length."""
+        self.ensure_waveform_loaded()
+        start = (sim_t_start * WAVEFORM_HZ) % self.waveform_length
+        n = (sim_t_end - sim_t_start) * WAVEFORM_HZ
+        idx = (start + np.arange(n)) % self.waveform_length
+        chunk = self.waveform[idx]
+        return {
+            key: [None if np.isnan(v) else round(float(v), 4) for v in chunk[:, i]]
+            for i, key in enumerate(WAVEFORM_KEYS)
+        }
 
 
 def _forward_fill(arr: np.ndarray) -> np.ndarray:

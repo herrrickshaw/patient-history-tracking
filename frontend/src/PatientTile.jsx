@@ -41,7 +41,7 @@ function Sparkline({ values, level }) {
   )
 }
 
-export default function PatientTile({ bed, history }) {
+export default function PatientTile({ bed, history, onClick }) {
   const { bed_id, vitals, alerts, case_id } = bed
   const worst = alerts.some((a) => a.level === 'critical')
     ? 'critical'
@@ -50,7 +50,7 @@ export default function PatientTile({ bed, history }) {
       : 'ok'
 
   return (
-    <div className={`tile tile-${worst}`}>
+    <div className={`tile tile-${worst}`} onClick={onClick} role="button" tabIndex={0}>
       <div className="tile-header">
         <span className="bed-id">{bed_id}</span>
         <span className="case-id">VitalDB #{case_id}</span>

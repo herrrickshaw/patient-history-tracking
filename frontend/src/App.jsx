@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import PatientTile from './PatientTile.jsx'
+import PatientDetail from './PatientDetail.jsx'
 import './App.css'
 
 const WS_URL = 'ws://localhost:8710/ws/vitals'
@@ -8,6 +9,7 @@ const HISTORY_LEN = 40
 export default function App() {
   const [bedsById, setBedsById] = useState({})
   const [connected, setConnected] = useState(false)
+  const [selectedBed, setSelectedBed] = useState(null)
   const historyRef = useRef({})
 
   useEffect(() => {
@@ -45,6 +47,10 @@ export default function App() {
   const beds = Object.values(bedsById).sort((a, b) => a.bed_id.localeCompare(b.bed_id))
   const activeAlerts = beds.reduce((n, b) => n + b.alerts.length, 0)
 
+  if (selectedBed) {
+    return <PatientDetail bedId={selectedBed} onClose={() => setSelectedBed(null)} />
+  }
+
   return (
     <div className="dashboard">
       <header className="dashboard-header">
@@ -61,7 +67,12 @@ export default function App() {
       </header>
       <main className="bed-grid">
         {beds.map((bed) => (
-          <PatientTile key={bed.bed_id} bed={bed} history={historyRef.current[bed.bed_id] ?? []} />
+          <PatientTile
+            key={bed.bed_id}
+            bed={bed}
+            history={historyRef.current[bed.bed_id] ?? []}
+            onClick={() => setSelectedBed(bed.bed_id)}
+          />
         ))}
       </main>
     </div>
