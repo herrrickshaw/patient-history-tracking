@@ -9,6 +9,7 @@ const TYPE_LABELS = {
   prescription_ordered: 'Prescriptions ordered',
   prescription_discontinued: 'Prescriptions discontinued',
   medication_administered: 'Medication given',
+  discharge_summary_ready: 'Discharge summary ready',
 }
 
 function describe(event) {
@@ -35,6 +36,8 @@ function describe(event) {
       return 'All active orders discontinued'
     case 'medication_administered':
       return `${event.payload.drug} ${event.payload.dose} (${event.payload.route})`
+    case 'discharge_summary_ready':
+      return 'See discharge summary below'
     default:
       return ''
   }

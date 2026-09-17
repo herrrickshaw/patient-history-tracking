@@ -312,6 +312,9 @@ body {
   margin-top: 20px;
 }
 .rx-header h3 { margin: 0 0 4px; font-size: 15px; }
+.dsum-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.dsum-open-link { color: #4ea1ff; font-size: 13px; text-decoration: none; white-space: nowrap; }
+.dsum-open-link:hover { text-decoration: underline; }
 .rx-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
 .rx-table th {
   text-align: left;

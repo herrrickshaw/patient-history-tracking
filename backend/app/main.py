@@ -14,8 +14,9 @@ import time
 
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 
-from . import alerts, health_record, insurance_connect, patient_identity, prescriptions, vitals_source
+from . import alerts, discharge_summary, health_record, insurance_connect, patient_identity, prescriptions, vitals_source
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("icu-dashboard")
@@ -38,6 +39,8 @@ app.add_middleware(
 beds: dict[str, vitals_source.BedSource] = {}
 bed_identities: dict[str, dict] = {}
 bed_prescriptions: dict[str, list[dict]] = {}
+bed_vitals_accum: dict[str, dict[str, dict]] = {}
+bed_admit_t: dict[str, int] = {}
 VITALS_SNAPSHOT_EVERY_SIM_SEC = 60
 
 # Single shared sim-time clock so every connected client (the bed grid
@@ -81,7 +84,20 @@ async def start_clock() -> None:
     asyncio.create_task(clock_loop())
 
 
+def _update_vitals_accum(bed_id: str, vitals: dict) -> None:
+    accum = bed_vitals_accum.setdefault(bed_id, {})
+    for key, value in vitals.items():
+        if value is None:
+            continue
+        entry = accum.setdefault(key, {"min": value, "max": value, "last": value})
+        entry["min"] = min(entry["min"], value)
+        entry["max"] = max(entry["max"], value)
+        entry["last"] = value
+
+
 def _admit(bed_id: str, identity: dict, sim_t: int) -> None:
+    bed_admit_t[bed_id] = sim_t
+    bed_vitals_accum[bed_id] = {}
     health_record.push_event(
         identity["abha_id"], "admission", source=bed_id, sim_t=sim_t,
         payload={"department": identity["department"], "procedure": identity["procedure"]},
@@ -103,17 +119,26 @@ def _admit(bed_id: str, identity: dict, sim_t: int) -> None:
 
 
 def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
-    health_record.push_event(identity["abha_id"], "discharge", source=bed_id, sim_t=sim_t, payload={})
+    abha_id = identity["abha_id"]
+    admitted_t = bed_admit_t.get(bed_id, 0)
+    encounter_events = [e for e in health_record.get_timeline(abha_id) if admitted_t <= e["sim_t"] <= sim_t]
+    alert_events = [e for e in reversed(encounter_events) if e["type"] == "alert_raised"]
+    medication_events = [e for e in reversed(encounter_events) if e["type"] == "medication_administered"]
+
+    health_record.push_event(abha_id, "discharge", source=bed_id, sim_t=sim_t, payload={})
     claim = insurance_connect.submit_claim(
-        identity["abha_id"], {"department": identity["department"], "procedure": identity["procedure"]},
+        abha_id, {"department": identity["department"], "procedure": identity["procedure"]},
     )
-    health_record.push_event(
-        identity["abha_id"], "insurance_claim_submitted", source=bed_id, sim_t=sim_t, payload=claim,
-    )
+    health_record.push_event(abha_id, "insurance_claim_submitted", source=bed_id, sim_t=sim_t, payload=claim)
 
     for order in bed_prescriptions.get(bed_id, []):
         order["status"] = "discontinued"
-    health_record.push_event(identity["abha_id"], "prescription_discontinued", source=bed_id, sim_t=sim_t, payload={})
+    health_record.push_event(abha_id, "prescription_discontinued", source=bed_id, sim_t=sim_t, payload={})
+
+    discharge_summary.build(
+        identity, admitted_t, sim_t, bed_vitals_accum.get(bed_id, {}), alert_events, medication_events, claim,
+    )
+    health_record.push_event(abha_id, "discharge_summary_ready", source=bed_id, sim_t=sim_t, payload={})
 
 
 def _record_events(t: int, last_alert_keys: dict[str, set[str]], last_cycle: dict[str, int]) -> None:
@@ -137,6 +162,7 @@ def _record_events(t: int, last_alert_keys: dict[str, set[str]], last_cycle: dic
                 order["next_due"] = t + order["frequency_sim_sec"]
 
         vitals = src.tick(t)
+        _update_vitals_accum(bed_id, vitals)
         current = alerts.evaluate(vitals)
         current_keys = {a["vital"] for a in current}
         prev_keys = last_alert_keys[bed_id]
@@ -202,6 +228,28 @@ def bed_prescriptions_endpoint(bed_id: str):
         "disclaimer": prescriptions.DISCLAIMER,
         "orders": bed_prescriptions.get(bed_id, []),
     }
+
+
+@app.get("/api/beds/{bed_id}/discharge-summary")
+def bed_discharge_summary(bed_id: str):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    summary = discharge_summary.latest(identity["abha_id"])
+    if summary is None:
+        return {"available": False, "disclaimer": discharge_summary.DISCLAIMER}
+    return {"available": True, **summary}
+
+
+@app.get("/api/beds/{bed_id}/discharge-summary.html", response_class=HTMLResponse)
+def bed_discharge_summary_html(bed_id: str):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    summary = discharge_summary.latest(identity["abha_id"])
+    if summary is None:
+        return HTMLResponse("<p>No discharge summary yet -- this encounter hasn't been discharged.</p>")
+    return HTMLResponse(discharge_summary.render_html(summary))
 
 
 @app.get("/api/beds/{bed_id}/record")
