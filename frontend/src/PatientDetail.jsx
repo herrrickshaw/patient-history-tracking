@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import IdCard from './IdCard.jsx'
+import InsuranceCard from './InsuranceCard.jsx'
 import HealthTimeline from './HealthTimeline.jsx'
 import WaveformCanvas from './WaveformCanvas.jsx'
 
@@ -9,6 +10,7 @@ const WAVEFORM_BUFFER_LEN = 1200 // ~12 sim-seconds at 100Hz
 
 export default function PatientDetail({ bedId, onClose }) {
   const [identity, setIdentity] = useState(null)
+  const [insurance, setInsurance] = useState(null)
   const [record, setRecord] = useState(null)
   const ecgBuffer = useRef(new Array(WAVEFORM_BUFFER_LEN).fill(null))
   const plethBuffer = useRef(new Array(WAVEFORM_BUFFER_LEN).fill(null))
@@ -18,7 +20,10 @@ export default function PatientDetail({ bedId, onClose }) {
   }, [bedId])
 
   useEffect(() => {
-    const load = () => fetch(`${API_BASE}/api/beds/${bedId}/record`).then((r) => r.json()).then(setRecord)
+    const load = () => {
+      fetch(`${API_BASE}/api/beds/${bedId}/record`).then((r) => r.json()).then(setRecord)
+      fetch(`${API_BASE}/api/beds/${bedId}/insurance`).then((r) => r.json()).then(setInsurance)
+    }
     load()
     const id = setInterval(load, 5000)
     return () => clearInterval(id)
@@ -58,6 +63,7 @@ export default function PatientDetail({ bedId, onClose }) {
       <div className="detail-columns">
         <div className="detail-col">
           <IdCard identity={identity} />
+          <InsuranceCard insurance={insurance} />
         </div>
         <div className="detail-col detail-col-wide">
           <div className="waveform-panel">

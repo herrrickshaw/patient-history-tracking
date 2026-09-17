@@ -1,14 +1,19 @@
 const TYPE_LABELS = {
   admission: 'Admitted',
+  discharge: 'Discharged',
   alert_raised: 'Alert raised',
   alert_resolved: 'Alert resolved',
   vitals_snapshot: 'Vitals snapshot',
+  insurance_eligibility_checked: 'Eligibility checked',
+  insurance_claim_submitted: 'Claim submitted',
 }
 
 function describe(event) {
   switch (event.type) {
     case 'admission':
       return `${event.payload.department} — ${event.payload.procedure}`
+    case 'discharge':
+      return 'Encounter closed'
     case 'alert_raised':
     case 'alert_resolved':
       return event.payload.message ?? event.payload.vital
@@ -17,6 +22,10 @@ function describe(event) {
         .filter(([, v]) => v !== null && v !== undefined)
         .map(([k, v]) => `${k} ${v}`)
         .join(' · ')
+    case 'insurance_eligibility_checked':
+      return `${event.payload.insurer} — ${event.payload.status} (${event.payload.authorization_ref})`
+    case 'insurance_claim_submitted':
+      return `${event.payload.claim_id} — ${event.payload.amount_estimate} units — ${event.payload.status}`
     default:
       return ''
   }

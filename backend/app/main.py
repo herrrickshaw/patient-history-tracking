@@ -15,7 +15,7 @@ import time
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import alerts, health_record, patient_identity, vitals_source
+from . import alerts, health_record, insurance_connect, patient_identity, vitals_source
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("icu-dashboard")
@@ -51,10 +51,7 @@ def load_beds() -> None:
         beds[bed_id] = vitals_source.BedSource(bed_id, case_id)
         identity = patient_identity.build_identity(bed_id, case_id)
         bed_identities[bed_id] = identity
-        health_record.push_event(
-            identity["abha_id"], "admission", source=bed_id, sim_t=0,
-            payload={"department": identity["department"], "procedure": identity["procedure"]},
-        )
+        _admit(bed_id, identity, sim_t=0)
 
 
 @app.on_event("startup")
@@ -62,17 +59,48 @@ async def start_clock() -> None:
     async def clock_loop():
         global sim_t
         last_alert_keys: dict[str, set[str]] = {bed_id: set() for bed_id in beds}
+        last_cycle: dict[str, int] = {bed_id: 0 for bed_id in beds}
         while True:
             await asyncio.sleep(REAL_TICK_SEC)
             sim_t += SIM_SECONDS_PER_TICK
-            _record_events(sim_t, last_alert_keys)
+            _record_events(sim_t, last_alert_keys, last_cycle)
 
     asyncio.create_task(clock_loop())
 
 
-def _record_events(t: int, last_alert_keys: dict[str, set[str]]) -> None:
+def _admit(bed_id: str, identity: dict, sim_t: int) -> None:
+    health_record.push_event(
+        identity["abha_id"], "admission", source=bed_id, sim_t=sim_t,
+        payload={"department": identity["department"], "procedure": identity["procedure"]},
+    )
+    eligibility = insurance_connect.check_eligibility(identity["abha_id"])
+    health_record.push_event(
+        identity["abha_id"], "insurance_eligibility_checked", source=bed_id, sim_t=sim_t, payload=eligibility,
+    )
+
+
+def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
+    health_record.push_event(identity["abha_id"], "discharge", source=bed_id, sim_t=sim_t, payload={})
+    claim = insurance_connect.submit_claim(
+        identity["abha_id"], {"department": identity["department"], "procedure": identity["procedure"]},
+    )
+    health_record.push_event(
+        identity["abha_id"], "insurance_claim_submitted", source=bed_id, sim_t=sim_t, payload=claim,
+    )
+
+
+def _record_events(t: int, last_alert_keys: dict[str, set[str]], last_cycle: dict[str, int]) -> None:
     for bed_id, src in beds.items():
-        abha_id = bed_identities[bed_id]["abha_id"]
+        identity = bed_identities[bed_id]
+        abha_id = identity["abha_id"]
+
+        cycle = t // src.length
+        if cycle > last_cycle[bed_id]:
+            _discharge(bed_id, identity, t)
+            _admit(bed_id, identity, t)
+            last_cycle[bed_id] = cycle
+            last_alert_keys[bed_id] = set()  # new encounter, previous alarms don't carry over
+
         vitals = src.tick(t)
         current = alerts.evaluate(vitals)
         current_keys = {a["vital"] for a in current}
@@ -110,6 +138,19 @@ def bed_identity(bed_id: str):
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
     return identity
+
+
+@app.get("/api/beds/{bed_id}/insurance")
+def bed_insurance(bed_id: str):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    record = insurance_connect.get_record(identity["abha_id"]) or {}
+    return {
+        "disclaimer": insurance_connect.DISCLAIMER,
+        "abha_id": identity["abha_id"],
+        **{k: v for k, v in record.items() if not k.startswith("_")},
+    }
 
 
 @app.get("/api/beds/{bed_id}/record")

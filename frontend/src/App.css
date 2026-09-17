@@ -224,6 +224,32 @@ body {
   border-top: 1px solid var(--panel-border);
 }
 
+/* ---- insurance connect card ---- */
+.insurance-card {
+  margin-top: 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.insurance-card-banner {
+  background: #2a3742;
+  color: var(--text);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-align: center;
+  padding: 4px;
+  letter-spacing: 0.03em;
+}
+.insurance-card-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.insurance-row { display: flex; justify-content: space-between; font-size: 13px; gap: 10px; }
+.insurance-label { color: var(--muted); }
+.insurance-divider { border-top: 1px solid var(--panel-border); margin: 4px 0; }
+.insurance-status { font-weight: 600; }
+.insurance-status-eligible, .insurance-status-approved { color: var(--ok); }
+.insurance-status-coverage_lapsed { color: var(--critical); }
+.insurance-status-under_review { color: var(--warning); }
+
 /* ---- waveforms ---- */
 .waveform-panel {
   background: var(--panel);
@@ -257,5 +283,8 @@ body {
 .timeline-alert_raised .timeline-type { color: var(--warning); }
 .timeline-alert_resolved .timeline-type { color: var(--ok); }
 .timeline-admission .timeline-type { color: #4ea1ff; }
+.timeline-discharge .timeline-type { color: var(--muted); }
+.timeline-insurance_eligibility_checked .timeline-type,
+.timeline-insurance_claim_submitted .timeline-type { color: #c084fc; }
 .timeline-source { color: var(--muted); text-align: right; }
 .timeline-empty { color: var(--muted); font-size: 13px; }
