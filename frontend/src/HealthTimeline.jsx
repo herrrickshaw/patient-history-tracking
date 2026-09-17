@@ -6,6 +6,9 @@ const TYPE_LABELS = {
   vitals_snapshot: 'Vitals snapshot',
   insurance_eligibility_checked: 'Eligibility checked',
   insurance_claim_submitted: 'Claim submitted',
+  prescription_ordered: 'Prescriptions ordered',
+  prescription_discontinued: 'Prescriptions discontinued',
+  medication_administered: 'Medication given',
 }
 
 function describe(event) {
@@ -26,6 +29,12 @@ function describe(event) {
       return `${event.payload.insurer} — ${event.payload.status} (${event.payload.authorization_ref})`
     case 'insurance_claim_submitted':
       return `${event.payload.claim_id} — ${event.payload.amount_estimate} units — ${event.payload.status}`
+    case 'prescription_ordered':
+      return event.payload.drugs.join(', ')
+    case 'prescription_discontinued':
+      return 'All active orders discontinued'
+    case 'medication_administered':
+      return `${event.payload.drug} ${event.payload.dose} (${event.payload.route})`
     default:
       return ''
   }

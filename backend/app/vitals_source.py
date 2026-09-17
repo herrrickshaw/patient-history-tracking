@@ -41,7 +41,7 @@ class BedSource:
     going blank, so gaps in the source data are forward-filled.
     """
 
-    def __init__(self, bed_id: str, case_id: int):
+    def __init__(self, bed_id: str, case_id: int, encounter_length: int | None = None):
         self.bed_id = bed_id
         self.case_id = case_id
         raw = vitaldb.load_case(case_id, TRACK_NAMES, interval=SAMPLE_INTERVAL_SEC)
@@ -49,6 +49,13 @@ class BedSource:
         self.length = len(self.series)
         self.waveform: np.ndarray | None = None
         self.waveform_length = 0
+        # How long one admission-to-discharge encounter lasts, in sim
+        # seconds. Defaults to the real case length; a demo bed can
+        # pass a short override so the encounter cycle (and the
+        # insurance eligibility/claim events it drives) is visible in
+        # seconds instead of tens of minutes, while the underlying
+        # vitals keep playing continuously off self.length.
+        self.encounter_length = encounter_length or self.length
 
     def tick(self, t: int) -> dict[str, float | None]:
         row = self.series[t % self.length]

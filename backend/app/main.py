@@ -15,7 +15,7 @@ import time
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import alerts, health_record, insurance_connect, patient_identity, vitals_source
+from . import alerts, health_record, insurance_connect, patient_identity, prescriptions, vitals_source
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("icu-dashboard")
@@ -23,6 +23,9 @@ log = logging.getLogger("icu-dashboard")
 NUM_BEDS = 6
 REAL_TICK_SEC = 1.0
 SIM_SECONDS_PER_TICK = 4  # playback speed-up so a ~90min case cycles in a demo-friendly window
+
+DEMO_BED_ID = "Bed-DEMO"
+DEMO_ENCOUNTER_SIM_SEC = 40  # ~10 real seconds at 4x playback -- watch a full admit/discharge/claim cycle live
 
 app = FastAPI(title="ICU Dashboard Analogue")
 app.add_middleware(
@@ -34,6 +37,7 @@ app.add_middleware(
 
 beds: dict[str, vitals_source.BedSource] = {}
 bed_identities: dict[str, dict] = {}
+bed_prescriptions: dict[str, list[dict]] = {}
 VITALS_SNAPSHOT_EVERY_SIM_SEC = 60
 
 # Single shared sim-time clock so every connected client (the bed grid
@@ -43,15 +47,24 @@ sim_t = 0
 
 @app.on_event("startup")
 def load_beds() -> None:
-    case_ids = vitals_source.pick_case_ids(NUM_BEDS)
+    case_ids = vitals_source.pick_case_ids(NUM_BEDS + 1)  # +1 distinct case for the fast-cycle demo bed
     labels = [chr(ord("A") + i) for i in range(NUM_BEDS)]
-    for label, case_id in zip(labels, case_ids):
+    for label, case_id in zip(labels, case_ids[:NUM_BEDS]):
         bed_id = f"Bed-{label}"
         log.info("loading %s <- VitalDB case %s", bed_id, case_id)
         beds[bed_id] = vitals_source.BedSource(bed_id, case_id)
         identity = patient_identity.build_identity(bed_id, case_id)
         bed_identities[bed_id] = identity
         _admit(bed_id, identity, sim_t=0)
+
+    demo_case_id = case_ids[NUM_BEDS]
+    log.info("loading %s <- VitalDB case %s (fast-cycle demo)", DEMO_BED_ID, demo_case_id)
+    beds[DEMO_BED_ID] = vitals_source.BedSource(DEMO_BED_ID, demo_case_id, encounter_length=DEMO_ENCOUNTER_SIM_SEC)
+    demo_identity = patient_identity.build_identity(DEMO_BED_ID, demo_case_id)
+    demo_identity["name"] = f"{demo_identity['name']} (fast-cycle demo)"
+    demo_identity["is_demo"] = True
+    bed_identities[DEMO_BED_ID] = demo_identity
+    _admit(DEMO_BED_ID, demo_identity, sim_t=0)
 
 
 @app.on_event("startup")
@@ -78,6 +91,16 @@ def _admit(bed_id: str, identity: dict, sim_t: int) -> None:
         identity["abha_id"], "insurance_eligibility_checked", source=bed_id, sim_t=sim_t, payload=eligibility,
     )
 
+    orders = prescriptions.generate_orders(identity["department"])
+    for order in orders:
+        if order["frequency_sim_sec"]:
+            order["next_due"] = sim_t + order["frequency_sim_sec"]
+    bed_prescriptions[bed_id] = orders
+    health_record.push_event(
+        identity["abha_id"], "prescription_ordered", source=bed_id, sim_t=sim_t,
+        payload={"drugs": [o["drug"] for o in orders]},
+    )
+
 
 def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
     health_record.push_event(identity["abha_id"], "discharge", source=bed_id, sim_t=sim_t, payload={})
@@ -88,18 +111,30 @@ def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
         identity["abha_id"], "insurance_claim_submitted", source=bed_id, sim_t=sim_t, payload=claim,
     )
 
+    for order in bed_prescriptions.get(bed_id, []):
+        order["status"] = "discontinued"
+    health_record.push_event(identity["abha_id"], "prescription_discontinued", source=bed_id, sim_t=sim_t, payload={})
+
 
 def _record_events(t: int, last_alert_keys: dict[str, set[str]], last_cycle: dict[str, int]) -> None:
     for bed_id, src in beds.items():
         identity = bed_identities[bed_id]
         abha_id = identity["abha_id"]
 
-        cycle = t // src.length
+        cycle = t // src.encounter_length
         if cycle > last_cycle[bed_id]:
             _discharge(bed_id, identity, t)
             _admit(bed_id, identity, t)
             last_cycle[bed_id] = cycle
             last_alert_keys[bed_id] = set()  # new encounter, previous alarms don't carry over
+
+        for order in bed_prescriptions.get(bed_id, []):
+            if order["status"] == "active" and order["next_due"] is not None and t >= order["next_due"]:
+                health_record.push_event(
+                    abha_id, "medication_administered", source=bed_id, sim_t=t,
+                    payload={"drug": order["drug"], "dose": order["dose"], "route": order["route"]},
+                )
+                order["next_due"] = t + order["frequency_sim_sec"]
 
         vitals = src.tick(t)
         current = alerts.evaluate(vitals)
@@ -122,7 +157,13 @@ def _record_events(t: int, last_alert_keys: dict[str, set[str]], last_cycle: dic
 @app.get("/api/beds")
 def list_beds():
     return [
-        {"bed_id": bed_id, "source": f"VitalDB case #{src.case_id}", "length_sec": src.length}
+        {
+            "bed_id": bed_id,
+            "source": f"VitalDB case #{src.case_id}",
+            "length_sec": src.length,
+            "encounter_length_sec": src.encounter_length,
+            "is_demo": bed_identities.get(bed_id, {}).get("is_demo", False),
+        }
         for bed_id, src in beds.items()
     ]
 
@@ -150,6 +191,16 @@ def bed_insurance(bed_id: str):
         "disclaimer": insurance_connect.DISCLAIMER,
         "abha_id": identity["abha_id"],
         **{k: v for k, v in record.items() if not k.startswith("_")},
+    }
+
+
+@app.get("/api/beds/{bed_id}/prescriptions")
+def bed_prescriptions_endpoint(bed_id: str):
+    if bed_id not in beds:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    return {
+        "disclaimer": prescriptions.DISCLAIMER,
+        "orders": bed_prescriptions.get(bed_id, []),
     }
 
 

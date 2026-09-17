@@ -52,7 +52,10 @@ export default function PatientTile({ bed, history, onClick }) {
   return (
     <div className={`tile tile-${worst}`} onClick={onClick} role="button" tabIndex={0}>
       <div className="tile-header">
-        <span className="bed-id">{bed_id}</span>
+        <span className="bed-id">
+          {bed_id}
+          {bed_id === 'Bed-DEMO' && <span className="demo-badge">FAST-CYCLE DEMO</span>}
+        </span>
         <span className="case-id">VitalDB #{case_id}</span>
       </div>
       <div className="vitals-grid">

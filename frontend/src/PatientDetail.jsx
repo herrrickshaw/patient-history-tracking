@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import IdCard from './IdCard.jsx'
 import InsuranceCard from './InsuranceCard.jsx'
+import PrescriptionTracker from './PrescriptionTracker.jsx'
 import HealthTimeline from './HealthTimeline.jsx'
 import WaveformCanvas from './WaveformCanvas.jsx'
 
@@ -12,6 +13,7 @@ export default function PatientDetail({ bedId, onClose }) {
   const [identity, setIdentity] = useState(null)
   const [insurance, setInsurance] = useState(null)
   const [record, setRecord] = useState(null)
+  const [prescriptions, setPrescriptions] = useState(null)
   const ecgBuffer = useRef(new Array(WAVEFORM_BUFFER_LEN).fill(null))
   const plethBuffer = useRef(new Array(WAVEFORM_BUFFER_LEN).fill(null))
 
@@ -23,6 +25,7 @@ export default function PatientDetail({ bedId, onClose }) {
     const load = () => {
       fetch(`${API_BASE}/api/beds/${bedId}/record`).then((r) => r.json()).then(setRecord)
       fetch(`${API_BASE}/api/beds/${bedId}/insurance`).then((r) => r.json()).then(setInsurance)
+      fetch(`${API_BASE}/api/beds/${bedId}/prescriptions`).then((r) => r.json()).then(setPrescriptions)
     }
     load()
     const id = setInterval(load, 5000)
@@ -73,6 +76,7 @@ export default function PatientDetail({ bedId, onClose }) {
         </div>
       </div>
 
+      <PrescriptionTracker record={prescriptions} />
       <HealthTimeline record={record} />
     </div>
   )
