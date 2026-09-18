@@ -121,11 +121,15 @@ and a single company can register as more than one:
 
 **[Eka.Care](https://www.eka.care/services/abdm-enabling-ecosystems)**
 was one of the first private platforms to register as *both* a HIP and
-an HIU. The government has claimed roughly 800 companies onboarded
-onto ABDM overall, though no single public, itemized registry of every
-licensed Consent Manager turned up in research for this section — take
-that count as a government-stated figure, not something independently
-verified here.
+an HIU. Its Bangalore job postings show a modern, coherent stack:
+**Go, Python (Django/Flask)** on the backend, native **iOS/Android**
+mobile, and **AWS + Terraform + Jenkins** for infra/DevOps — a single
+startup stack, unlike the mixed or client-dependent ones found for
+the EMR-export companies above. The government has claimed roughly
+800 companies onboarded onto ABDM overall, though no single public,
+itemized registry of every licensed Consent Manager turned up in
+research for this section — take that count as a government-stated
+figure, not something independently verified here.
 
 One easy mix-up worth flagging: India's 2023 Digital Personal Data
 Protection Act (DPDPA) introduces a *separate* "Consent Manager"
@@ -244,6 +248,13 @@ connect and OCR features are patterned after, in two different ways:
   (Orbi Health)**, **Bajaj Finserv**, and **Paytm** — notably, two of
   those are fintech/consumer companies rather than traditional
   health-IT vendors, pulled in by the incentive structure itself.
+  Bajaj Finserv Health's job postings show **Java** backend, **React
+  + Node.js** full-stack, and **Angular + Ionic** hybrid mobile — but
+  that's their general health-platform engineering stack, not a team
+  specifically labeled "ABDM" or "DHIS," so treat it as indicative
+  rather than exact. Paytm's health/insurance-specific stack couldn't
+  be confirmed — searches surfaced only their general engineering job
+  postings, nothing tied to their health/ABDM work specifically.
 
 The Health Claims Exchange (HCX) piece this app's `insurance_connect.py`
 is patterned after is the standardisation layer for that second
