@@ -24,10 +24,13 @@ export default function PrescriptionTracker({ record }) {
         <tbody>
           {record.orders.map((o, i) => (
             <tr key={i} className={`rx-row-${o.status}`}>
-              <td>{o.drug}</td>
+              <td>
+                {o.drug}
+                {o.source === 'ocr' && <span className="rx-ocr-badge">OCR</span>}
+              </td>
               <td>{o.dose}</td>
               <td>{o.route}</td>
-              <td>{o.frequency_sim_sec ? `every ${o.frequency_sim_sec}s (demo)` : 'continuous'}</td>
+              <td>{o.frequency_sim_sec ? `every ${o.frequency_sim_sec}s (demo)` : 'no repeat schedule'}</td>
               <td className={`rx-status rx-status-${o.status}`}>{STATUS_LABEL[o.status] ?? o.status}</td>
             </tr>
           ))}

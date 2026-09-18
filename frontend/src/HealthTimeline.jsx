@@ -10,6 +10,9 @@ const TYPE_LABELS = {
   prescription_discontinued: 'Prescriptions discontinued',
   medication_administered: 'Medication given',
   discharge_summary_ready: 'Discharge summary ready',
+  prescription_ocr_digitized: 'Prescription photo digitized',
+  prescription_ocr_approved: 'OCR order approved',
+  prescription_ocr_rejected: 'OCR order rejected',
 }
 
 function describe(event) {
@@ -38,6 +41,12 @@ function describe(event) {
       return `${event.payload.drug} ${event.payload.dose} (${event.payload.route})`
     case 'discharge_summary_ready':
       return 'See discharge summary below'
+    case 'prescription_ocr_digitized':
+      return `${event.payload.candidate_count} candidate line(s) awaiting review`
+    case 'prescription_ocr_approved':
+      return `${event.payload.drug} ${event.payload.dose} (from "${event.payload.raw_line}")`
+    case 'prescription_ocr_rejected':
+      return `Discarded: "${event.payload.raw_line}"`
     default:
       return ''
   }

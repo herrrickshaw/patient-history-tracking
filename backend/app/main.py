@@ -11,12 +11,23 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
+import uuid
 
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import Body, FastAPI, File, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
 
-from . import alerts, discharge_summary, health_record, insurance_connect, patient_identity, prescriptions, vitals_source
+from . import (
+    alerts,
+    discharge_summary,
+    health_record,
+    insurance_connect,
+    patient_identity,
+    prescription_ocr,
+    prescriptions,
+    vitals_source,
+)
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("icu-dashboard")
@@ -39,6 +50,7 @@ app.add_middleware(
 beds: dict[str, vitals_source.BedSource] = {}
 bed_identities: dict[str, dict] = {}
 bed_prescriptions: dict[str, list[dict]] = {}
+bed_ocr_pending: dict[str, list[dict]] = {}
 bed_vitals_accum: dict[str, dict[str, dict]] = {}
 bed_admit_t: dict[str, int] = {}
 VITALS_SNAPSHOT_EVERY_SIM_SEC = 60
@@ -228,6 +240,96 @@ def bed_prescriptions_endpoint(bed_id: str):
         "disclaimer": prescriptions.DISCLAIMER,
         "orders": bed_prescriptions.get(bed_id, []),
     }
+
+
+@app.post("/api/beds/{bed_id}/prescriptions/ocr")
+async def bed_prescriptions_ocr(bed_id: str, file: UploadFile = File(...)):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+
+    image_bytes = await file.read()
+    try:
+        raw_text = prescription_ocr.extract_text(image_bytes)
+    except Exception as exc:  # pytesseract/PIL raise on unreadable/corrupt images
+        raise HTTPException(status_code=400, detail=f"could not read image: {exc}") from exc
+
+    candidates = prescription_ocr.parse_candidates(raw_text)
+    pending = bed_ocr_pending.setdefault(bed_id, [])
+    for c in candidates:
+        c["id"] = uuid.uuid4().hex[:8]
+        pending.append(c)
+
+    health_record.push_event(
+        identity["abha_id"], "prescription_ocr_digitized", source=bed_id, sim_t=sim_t,
+        payload={"candidate_count": len(candidates)},
+    )
+    return {"disclaimer": prescription_ocr.DISCLAIMER, "raw_text": raw_text, "candidates": candidates}
+
+
+@app.get("/api/beds/{bed_id}/prescriptions/pending")
+def bed_prescriptions_pending(bed_id: str):
+    if bed_id not in beds:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    return {"disclaimer": prescription_ocr.DISCLAIMER, "candidates": bed_ocr_pending.get(bed_id, [])}
+
+
+class PrescriptionCorrection(BaseModel):
+    drug: str | None = None
+    dose: str | None = None
+    route: str | None = None
+    frequency_sim_sec: int | None = None
+
+
+@app.post("/api/beds/{bed_id}/prescriptions/pending/{item_id}/approve")
+def approve_pending_prescription(bed_id: str, item_id: str, correction: PrescriptionCorrection = Body(default=None)):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    pending = bed_ocr_pending.get(bed_id, [])
+    match = next((c for c in pending if c["id"] == item_id), None)
+    if match is None:
+        raise HTTPException(status_code=404, detail="unknown pending item")
+    pending.remove(match)
+
+    correction = correction or PrescriptionCorrection()
+    drug = correction.drug or match["drug"]
+    dose = correction.dose or match["dose"] or "(unspecified)"
+    route = correction.route or match["route"] or "(unspecified)"
+    freq = correction.frequency_sim_sec if correction.frequency_sim_sec is not None else match["frequency_sim_sec"]
+
+    order = {
+        "drug": drug,
+        "dose": dose,
+        "route": route,
+        "frequency_sim_sec": freq,
+        "status": "active",
+        "next_due": sim_t + freq if freq else None,
+        "source": "ocr",
+    }
+    bed_prescriptions.setdefault(bed_id, []).append(order)
+    health_record.push_event(
+        identity["abha_id"], "prescription_ocr_approved", source=bed_id, sim_t=sim_t,
+        payload={**order, "raw_line": match["raw_line"]},
+    )
+    return order
+
+
+@app.post("/api/beds/{bed_id}/prescriptions/pending/{item_id}/reject")
+def reject_pending_prescription(bed_id: str, item_id: str):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    pending = bed_ocr_pending.get(bed_id, [])
+    match = next((c for c in pending if c["id"] == item_id), None)
+    if match is None:
+        raise HTTPException(status_code=404, detail="unknown pending item")
+    pending.remove(match)
+    health_record.push_event(
+        identity["abha_id"], "prescription_ocr_rejected", source=bed_id, sim_t=sim_t,
+        payload={"raw_line": match["raw_line"]},
+    )
+    return {"rejected": True}
 
 
 @app.get("/api/beds/{bed_id}/discharge-summary")

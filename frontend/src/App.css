@@ -329,5 +329,65 @@ body {
 .rx-row-discontinued { opacity: 0.5; }
 .rx-status-active { color: var(--ok); font-weight: 600; }
 .rx-status-discontinued { color: var(--muted); font-weight: 600; }
+.rx-ocr-badge {
+  font-size: 9px;
+  font-weight: 700;
+  background: #4ea1ff;
+  color: #06131f;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
 .timeline-source { color: var(--muted); text-align: right; }
 .timeline-empty { color: var(--muted); font-size: 13px; }
+
+/* ---- prescription OCR ---- */
+.ocr-error { color: var(--critical); font-size: 13px; margin: 8px 0 0; }
+.ocr-raw-text { margin-top: 12px; font-size: 12px; }
+.ocr-raw-text summary { cursor: pointer; color: var(--muted); }
+.ocr-raw-text pre {
+  background: #0e141b;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-top: 6px;
+  white-space: pre-wrap;
+  color: var(--muted);
+}
+.ocr-candidates { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.ocr-candidate {
+  background: #0e141b;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.ocr-raw-line { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-style: italic; }
+.ocr-fields {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.6fr;
+  gap: 8px;
+}
+.ocr-fields input {
+  background: var(--bg);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  border-radius: 5px;
+  padding: 5px 8px;
+  font-size: 12.5px;
+}
+.ocr-actions { display: flex; gap: 8px; margin-top: 8px; }
+.ocr-actions button {
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ocr-approve { background: var(--ok); color: #062015; }
+.ocr-reject { background: #2a3742; color: var(--text); }
+.ocr-actions button:disabled { opacity: 0.5; cursor: default; }
+
+.timeline-prescription_ocr_digitized .timeline-type,
+.timeline-prescription_ocr_approved .timeline-type { color: #4ea1ff; }
+.timeline-prescription_ocr_rejected .timeline-type { color: var(--muted); }
