@@ -35,6 +35,47 @@ can do, at https://physionet.org. Once credentialed, swap
 `backend/app/vitals_source.py`'s VitalDB loader for a MIMIC-IV
 waveform reader; the bed/tick/alert interfaces don't need to change.
 
+## Fast-cycle demo bed
+
+`Bed-DEMO` (badged "FAST-CYCLE DEMO" in the grid) plays back a real
+VitalDB case like every other bed, but its admission-to-discharge
+**encounter length** is decoupled from that case's actual physiological
+data length: `backend/app/vitals_source.py`'s `BedSource` takes an
+optional `encounter_length` override (40 sim-seconds, ≈10 real seconds
+at 4x playback) instead of defaulting to the full case duration.
+
+The vitals themselves keep playing continuously off the real data —
+only the admission/discharge/insurance/prescription cycle is
+compressed. That's what makes it possible to actually *watch* a full
+discharge → insurance claim → re-admission → fresh prescriptions cycle
+inside the same session, instead of waiting out a ~15-real-minute
+natural case wrap like the other six beds.
+
+## Insurance connect (simulated)
+
+`backend/app/insurance_connect.py` fires an eligibility check on every
+admission and a claim submission on every discharge, both keyed by the
+same synthetic ABHA ID as everything else in the patient's record.
+
+It's patterned after two real systems, used only as a design
+reference — nothing here calls either one:
+
+- **Germany's gematik Telematikinfrastruktur (TI)**: a statutory
+  insurer electronically confirms coverage when a patient's eGK
+  (health card) is read at admission, and receives the billing claim
+  at discharge.
+- **India's ABDM Health Claims Exchange (HCX)**: standardises
+  eligibility checks and claim submission between providers and
+  payers, linked by the patient's ABHA number.
+
+Insurer names (`Yojana Mutual Health`, `Concordia Health Assurance`,
+etc.), policy numbers, eligibility status, and claim amounts/decisions
+are all invented deterministically from the ABHA ID — no real insurer,
+payer network, or claims clearinghouse is contacted, and no real
+financial transaction occurs. Surfaced in the UI as the "Simulated
+Insurance Connect" card and folded into the same health-record
+timeline as every other encounter event.
+
 ## Prescription OCR digitization
 
 Upload a photo or scan of a written prescription and the backend
@@ -69,6 +110,42 @@ trusted automatically**:
 Frontend: `frontend/src/PrescriptionOCR.jsx` (upload, raw-OCR-text
 disclosure, editable per-candidate review card) inside the patient
 detail view, next to the prescription tracker.
+
+## Lab report OCR digitization
+
+Same pipeline and the same non-negotiable review discipline, applied
+to lab reports instead of prescriptions
+(`backend/app/lab_ocr.py`). Testing it surfaced an even sharper
+example of why: a typed test report round-tripped through Tesseract
+and **lost every decimal point** — `13.5 g/dL` came back as `135`,
+`0.9 mg/dL` as `09`, and `12.0-15.5` as `120-155`. Because the
+(wrong) reference range and the (wrong) value were internally
+consistent, the auto-computed flag looked plausible too — exactly the
+kind of silent, easy-to-miss failure a review step exists to catch.
+
+1. `POST /api/beds/{bed_id}/labs/ocr` extracts text, then a regex
+   parser matches each line against a list of recognized analyte names
+   (Hemoglobin, WBC, Creatinine, Sodium, Glucose, etc.) and pulls
+   `value` / `unit` / `reference_range`; lines that don't mention a
+   recognized test are skipped so report headers/footers don't become
+   spurious results. A `flag` (`high`/`low`/`normal`) is computed by
+   comparing the extracted value against the extracted range.
+2. Every candidate lands in a pending-review queue
+   (`GET /api/beds/{bed_id}/labs/pending`) — never directly recorded
+   as a result.
+3. `POST .../pending/{item_id}/approve` takes the same kind of
+   correction override as prescriptions, so a reviewer can fix a
+   misread value/unit/range before it's recorded.
+   `POST .../pending/{item_id}/reject` discards a candidate.
+4. Approved results are derived straight from the patient's
+   health-record timeline (`GET /api/beds/{bed_id}/labs` filters for
+   `lab_result_approved` events — no separate results store) and are
+   included in the discharge summary, both the JSON payload and the
+   printable HTML document.
+
+Frontend: `frontend/src/LabOCR.jsx` (upload + review) and
+`frontend/src/LabResults.jsx` (approved results table), inside the
+patient detail view next to the prescription tracker.
 
 ## Running locally
 
