@@ -321,6 +321,47 @@ Frontend: `frontend/src/LabOCR.jsx` (upload + review) and
 `frontend/src/LabResults.jsx` (approved results table), inside the
 patient detail view next to the prescription tracker.
 
+## Real-world context: lab report digitization vendors
+
+Background for anyone comparing this demo's `lab_ocr.py` to what
+already exists in India — reference material, not something the app
+implements or connects to.
+
+- **[Ayu](https://ayuapp.com/)** (`ayuapp.com`, not to be confused
+  with *Ayu Health*, the unrelated Bengaluru hospital-network operator
+  of a similar name) is the closest real-world parallel to this repo's
+  combined prescription + lab OCR: a consumer PHR app whose OCR reads
+  10 Indian languages, extracts medication/dose/frequency from
+  photographed handwritten prescriptions, pulls test
+  parameters/reference ranges from lab reports, and parses discharge
+  summaries — the same three document types this demo digitizes,
+  aimed at families organizing records at home rather than a hospital
+  system.
+- **[Eka.Care](https://www.eka.care/services/abdm-enabling-ecosystems)**
+  (already the HIP+HIU example in the ABHA section above) also OCRs
+  and structures lab reports as part of its PHR product.
+- **Icanio Technologies** builds AI record-digitization platforms for
+  Indian *hospitals* specifically — the enterprise/B2B side of the
+  same problem, including OCR for handwritten records, rather than the
+  consumer-app side Ayu and Eka.Care cover.
+- **[Docsumo](https://www.docsumo.com/solutions/idp-for-healthcare)**
+  (Mumbai, founded 2019) is a general Intelligent Document Processing
+  platform with a healthcare/insurance vertical — extracting structured
+  data from medical reports, prior-authorization requests, and claims
+  at enterprise scale, closer to insurer/payer back-office automation
+  than a hospital bedside tool.
+
+One number worth noting because it explains a real design choice this
+repo shares: reported OCR accuracy on **standard NABL-format** lab
+reports (NABL — India's National Accreditation Board for Testing and
+Calibration Laboratories, which standardizes how accredited labs
+format results) runs above 90% for structured extraction, meaningfully
+higher than free-form handwriting. That's the same reason
+`lab_ocr.py` only matches lines against a list of known analyte
+names rather than trying to parse arbitrary text — recognizable,
+standardized formatting is what makes automated extraction tractable
+at all, in a real product or in this demo.
+
 ## Discharge summary generator
 
 At the moment a bed discharges — naturally, or every ~10s on the
