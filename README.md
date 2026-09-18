@@ -528,6 +528,49 @@ npm run dev -- --port 5273
 
 Open http://localhost:5273.
 
+## Real-world context: ICU dashboard competitors
+
+Background on the commercial products this whole repo is an analogue
+of — the four named in the opening paragraph, checked here rather
+than just asserted:
+
+- **[vTitan (Jeevantra / IntelliICU)](https://www.vtitan.com/intelli-icu)** —
+  Indian medical-device company (Chengalpattu, Tamil Nadu). IntelliICU
+  is the same hardware-cum-software shape as this repo's design:
+  connects to whatever mix of patient monitors, ventilators, and
+  syringe pumps a hospital already has, unifying them into one
+  dashboard; Jeevantra layers an AI chatbot for handover/medication/
+  fluid decision support on top. Now has its own site
+  ([intelliicu.com](https://intelliicu.com/)) distinct from vtitan.com.
+- **[Etiometry](https://www.etiometry.com/)** — US, founded 2010, roots
+  in pediatric ICU/cardiac care, now holds **11 FDA clearances** as a
+  regulated clinical decision-support device (most recently for
+  automating cardiogenic-shock staging from monitoring data). A
+  published study at Children's Hospital of Alabama associated its use
+  with a 30% reduction in mechanical ventilation duration and a 20%
+  decrease in length of stay — real outcomes data behind a real
+  regulatory approval, which is exactly the gap between this repo and
+  an actual medical device (see [Status](#status)).
+- **[Dozee](https://www.dozeehealth.ai/for-hospitals)** — Indian
+  contactless remote patient monitoring company: a under-mattress
+  sensor turns any bed into a monitored one, no wires or cuffs. In
+  named use at Apollo Hospitals, Wockhardt Hospitals, Breach Candy
+  Hospital, and Vijaya Medical, with a `dozee.us` presence suggesting
+  US expansion too.
+- **[AcuteCare.ai (CritIS)](https://www.acutecare.ai/en/about)** —
+  originally a 2017 spin-off of the University of Crete (Greece),
+  leading ICU/anaesthesia software provider at Greece's largest public
+  university hospitals; **CritIS Tele-ICU** (the module named in this
+  repo's opening line) is one module of their broader **CritIS
+  Synergy+** platform. Partnered with Sievestone LTD in 2024 to expand
+  globally beyond Greece.
+
+The common thread across all four: they're real, regulated (in
+Etiometry's case, FDA-cleared) medical products deployed in named
+hospitals, built by teams with device-integration and clinical
+partnerships this repo has none of. That gap is deliberate — see
+[Status](#status) for what this repo is and isn't.
+
 ## Reference projects this borrows ideas from
 
 - [mdpnp/mdpnp (OpenICE)](https://github.com/mdpnp/mdpnp) — open-source
