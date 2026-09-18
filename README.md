@@ -250,6 +250,51 @@ is patterned after is the standardisation layer for that second
 category — the eligibility-check/claim-submission protocol between
 providers and payers, linked by ABHA number.
 
+## Real-world context: Indian EMR export company tech stacks
+
+Background on the Indian companies that actually export EMR/health-data
+products abroad (as opposed to the mostly-domestic HMIS vendors and
+the government-built systems in the section above) — checked via job
+postings, continuing the same verification approach as the ICU
+dashboard competitors section.
+
+- **[Attune Technologies](https://ehealth.eletsonline.com/2015/10/attune-software-technology-expands-beyond-india/)**
+  — the clear real-export case already named above: its own cloud
+  EMR/HIS across 15 countries. Job postings point to a **Spring Boot**
+  backend and **React** frontend; one Glassdoor employee review
+  separately mentions a broader "Microsoft stack" being used
+  internally — a softer, less specific signal than the job-posting
+  detail, so treat that part as less certain.
+- **[Innovaccer](https://innovaccer.com/careers/jobs)** — not a
+  ground-up EMR (it integrates with and extends EHRs like Epic and
+  Cerner rather than replacing them), but the biggest Indian-origin
+  health-tech product selling into the US. Its Noida engineering job
+  postings show a genuinely **polyglot** stack rather than one
+  answer: some backend roles want **Python/Django/Flask +
+  PostgreSQL**, others want **Java/Spring/Hibernate**; frontend roles
+  split between **React.js** and (in more senior listings) **AngularJS**;
+  cloud/platform roles are **AWS**-based, described as "distributed
+  systems" work on their "healthcare intelligence cloud." Reads like a
+  company whose product surface grew through several different teams
+  or acquisitions rather than one single stack decision.
+- **[CitiusTech](https://www.citiustech.com/careers/job-openings)** —
+  not a product company at all here, worth remembering: an IT-services
+  firm that implements and integrates *other* vendors' EMRs (Epic,
+  etc.) for global clients. Its job postings are correspondingly
+  scattered across whatever a given client engagement needs: **Java/
+  Spring/Microservices**, a **MERN** (React + Node) track, even
+  **PHP/Laravel** on some listings, plus **Elasticsearch**, **Hasura**,
+  multi-cloud (**AWS/GCP/Azure**), and **Docker/Kubernetes**. That
+  breadth isn't a red flag the way it might be for a product company —
+  it's the expected shape for a consulting firm whose stack is really
+  "whatever the client's stack is."
+
+The pattern across all three mirrors the ICU-competitor section's
+finding: a company that owns one product (Attune) converges on one
+stack; a company integrating with many external systems (Innovaccer,
+and especially the pure-services CitiusTech) shows a stack that's
+either genuinely mixed or entirely client-dependent.
+
 ## Real-world context: insurance connect vendors
 
 Background for anyone comparing this demo's `insurance_connect.py`
