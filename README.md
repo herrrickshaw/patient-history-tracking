@@ -35,7 +35,49 @@ can do, at https://physionet.org. Once credentialed, swap
 `backend/app/vitals_source.py`'s VitalDB loader for a MIMIC-IV
 waveform reader; the bed/tick/alert interfaces don't need to change.
 
+## Prescription OCR digitization
+
+Upload a photo or scan of a written prescription and the backend
+digitizes it with local [Tesseract](https://github.com/tesseract-ocr/tesseract)
+OCR — no cloud OCR service, no API key, nothing leaves the machine.
+
+Handwriting recognition is unreliable, and this isn't a hypothetical
+concern: testing the pipeline against a plain typed image, Tesseract
+still misread a dose (650mg came back as 850mg) and garbled a
+frequency abbreviation. Because of that, **nothing extracted is
+trusted automatically**:
+
+1. `POST /api/beds/{bed_id}/prescriptions/ocr` (multipart file upload)
+   runs OCR (`backend/app/prescription_ocr.py`), then a regex parser
+   pulls a `drug` / `dose` / `route` / `frequency` candidate out of
+   each line, mapping common abbreviations (`OD`/`BD`/`TDS`/`QID`/
+   `HS`/`STAT`/`PRN`) to the existing compressed demo cadence.
+2. Every candidate lands in a per-bed **pending-review queue**
+   (`GET /api/beds/{bed_id}/prescriptions/pending`) — never directly
+   in the active prescription list.
+3. `POST .../pending/{item_id}/approve` accepts an optional JSON body
+   overriding any field, so a reviewer can fix a misread before it
+   becomes an order — plain accept/discard isn't enough review to be
+   meaningful. `POST .../pending/{item_id}/reject` discards a
+   candidate instead.
+4. Approved orders enter the same `backend/app/prescriptions.py`
+   lifecycle as any other order (administered on schedule, discharged
+   with the encounter) and show an **OCR** badge in the prescription
+   tracker. Every digitize/approve/reject is logged to the patient's
+   health-record timeline.
+
+Frontend: `frontend/src/PrescriptionOCR.jsx` (upload, raw-OCR-text
+disclosure, editable per-candidate review card) inside the patient
+detail view, next to the prescription tracker.
+
 ## Running locally
+
+Tesseract must be installed as a system binary (pip only installs the
+Python wrapper around it):
+
+```bash
+brew install tesseract   # macOS; see the Tesseract repo for other platforms
+```
 
 ```bash
 # backend
