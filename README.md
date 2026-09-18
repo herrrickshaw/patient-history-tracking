@@ -199,6 +199,40 @@ Frontend: `frontend/src/LabOCR.jsx` (upload + review) and
 `frontend/src/LabResults.jsx` (approved results table), inside the
 patient detail view next to the prescription tracker.
 
+## Discharge summary generator
+
+At the moment a bed discharges — naturally, or every ~10s on the
+fast-cycle demo bed — `backend/app/discharge_summary.py` compiles
+everything that happened during that one encounter into a single
+document:
+
+- Vitals min/max/last, tracked continuously through the encounter
+  (`main.py`'s `_update_vitals_accum`, reset on each admission) rather
+  than sampled from the periodic snapshots.
+- Every `alert_raised` and `medication_administered` event whose
+  `sim_t` falls inside the encounter's admission→discharge window,
+  filtered straight out of the health-record timeline.
+- Any `lab_result_approved` events from the same window — so a lab
+  result only makes it into the summary once a human has reviewed and
+  approved the OCR candidate, never straight from the pending queue.
+- The insurance-connect claim submitted at that same discharge.
+
+It's exposed two ways from the same underlying summary:
+
+- `GET /api/beds/{bed_id}/discharge-summary` — JSON, rendered inline
+  as the "Discharge summary" panel (`frontend/src/DischargeSummaryPanel.jsx`)
+  in the patient detail view.
+- `GET /api/beds/{bed_id}/discharge-summary.html` — a self-contained,
+  printable HTML document (linked from that panel as "Open printable
+  document"), with a mandatory red **SYNTHETIC DEMO DOCUMENT — NOT A
+  REAL DISCHARGE SUMMARY — NOT FOR CLINICAL USE** banner and the same
+  disclaimer repeated at the foot of the document, so it can't be
+  mistaken for the real thing even if printed or saved on its own.
+
+Only the *latest* encounter's summary is kept per bed
+(`discharge_summary.latest()`) — on the fast-cycle demo bed in
+particular, each new discharge overwrites what came before.
+
 ## Swapping in a commercial OCR SDK later
 
 Local Tesseract is free and needs no credentials, but it's a generic
