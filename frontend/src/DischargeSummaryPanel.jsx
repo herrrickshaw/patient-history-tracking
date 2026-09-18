@@ -61,6 +61,24 @@ export default function DischargeSummaryPanel({ bedId, summary }) {
         </tbody>
       </table>
 
+      {summary.lab_results?.length > 0 && (
+        <table className="rx-table">
+          <thead>
+            <tr><th>Test</th><th>Value</th><th>Reference range</th><th>Flag</th></tr>
+          </thead>
+          <tbody>
+            {summary.lab_results.map((e, i) => (
+              <tr key={i}>
+                <td>{e.payload.test}</td>
+                <td>{e.payload.value} {e.payload.unit ?? ''}</td>
+                <td>{e.payload.reference_range ?? '--'}</td>
+                <td className={`rx-flag-${e.payload.flag ?? 'unknown'}`}>{e.payload.flag ?? '--'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
       <p className="source-note">{summary.disclaimer}</p>
     </div>
   )

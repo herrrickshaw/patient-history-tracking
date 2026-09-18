@@ -13,6 +13,9 @@ const TYPE_LABELS = {
   prescription_ocr_digitized: 'Prescription photo digitized',
   prescription_ocr_approved: 'OCR order approved',
   prescription_ocr_rejected: 'OCR order rejected',
+  lab_report_digitized: 'Lab report photo digitized',
+  lab_result_approved: 'Lab result approved',
+  lab_result_rejected: 'Lab result rejected',
 }
 
 function describe(event) {
@@ -46,6 +49,12 @@ function describe(event) {
     case 'prescription_ocr_approved':
       return `${event.payload.drug} ${event.payload.dose} (from "${event.payload.raw_line}")`
     case 'prescription_ocr_rejected':
+      return `Discarded: "${event.payload.raw_line}"`
+    case 'lab_report_digitized':
+      return `${event.payload.candidate_count} candidate line(s) awaiting review`
+    case 'lab_result_approved':
+      return `${event.payload.test} ${event.payload.value} ${event.payload.unit ?? ''} (${event.payload.flag ?? 'unflagged'})`
+    case 'lab_result_rejected':
       return `Discarded: "${event.payload.raw_line}"`
     default:
       return ''

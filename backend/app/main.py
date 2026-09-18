@@ -23,6 +23,7 @@ from . import (
     discharge_summary,
     health_record,
     insurance_connect,
+    lab_ocr,
     patient_identity,
     prescription_ocr,
     prescriptions,
@@ -51,6 +52,7 @@ beds: dict[str, vitals_source.BedSource] = {}
 bed_identities: dict[str, dict] = {}
 bed_prescriptions: dict[str, list[dict]] = {}
 bed_ocr_pending: dict[str, list[dict]] = {}
+bed_lab_pending: dict[str, list[dict]] = {}
 bed_vitals_accum: dict[str, dict[str, dict]] = {}
 bed_admit_t: dict[str, int] = {}
 VITALS_SNAPSHOT_EVERY_SIM_SEC = 60
@@ -136,6 +138,7 @@ def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
     encounter_events = [e for e in health_record.get_timeline(abha_id) if admitted_t <= e["sim_t"] <= sim_t]
     alert_events = [e for e in reversed(encounter_events) if e["type"] == "alert_raised"]
     medication_events = [e for e in reversed(encounter_events) if e["type"] == "medication_administered"]
+    lab_events = [e for e in reversed(encounter_events) if e["type"] == "lab_result_approved"]
 
     health_record.push_event(abha_id, "discharge", source=bed_id, sim_t=sim_t, payload={})
     claim = insurance_connect.submit_claim(
@@ -149,6 +152,7 @@ def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
 
     discharge_summary.build(
         identity, admitted_t, sim_t, bed_vitals_accum.get(bed_id, {}), alert_events, medication_events, claim,
+        lab_events,
     )
     health_record.push_event(abha_id, "discharge_summary_ready", source=bed_id, sim_t=sim_t, payload={})
 
@@ -328,6 +332,96 @@ def reject_pending_prescription(bed_id: str, item_id: str):
     health_record.push_event(
         identity["abha_id"], "prescription_ocr_rejected", source=bed_id, sim_t=sim_t,
         payload={"raw_line": match["raw_line"]},
+    )
+    return {"rejected": True}
+
+
+@app.post("/api/beds/{bed_id}/labs/ocr")
+async def bed_labs_ocr(bed_id: str, file: UploadFile = File(...)):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+
+    image_bytes = await file.read()
+    try:
+        raw_text = lab_ocr.extract_text(image_bytes)
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"could not read image: {exc}") from exc
+
+    candidates = lab_ocr.parse_candidates(raw_text)
+    pending = bed_lab_pending.setdefault(bed_id, [])
+    for c in candidates:
+        c["id"] = uuid.uuid4().hex[:8]
+        pending.append(c)
+
+    health_record.push_event(
+        identity["abha_id"], "lab_report_digitized", source=bed_id, sim_t=sim_t,
+        payload={"candidate_count": len(candidates)},
+    )
+    return {"disclaimer": lab_ocr.DISCLAIMER, "raw_text": raw_text, "candidates": candidates}
+
+
+@app.get("/api/beds/{bed_id}/labs/pending")
+def bed_labs_pending(bed_id: str):
+    if bed_id not in beds:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    return {"disclaimer": lab_ocr.DISCLAIMER, "candidates": bed_lab_pending.get(bed_id, [])}
+
+
+@app.get("/api/beds/{bed_id}/labs")
+def bed_labs(bed_id: str):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    results = [e for e in health_record.get_timeline(identity["abha_id"]) if e["type"] == "lab_result_approved"]
+    return {"disclaimer": lab_ocr.DISCLAIMER, "results": [e["payload"] for e in results]}
+
+
+class LabCorrection(BaseModel):
+    test: str | None = None
+    value: str | None = None
+    unit: str | None = None
+    reference_range: str | None = None
+    flag: str | None = None
+
+
+@app.post("/api/beds/{bed_id}/labs/pending/{item_id}/approve")
+def approve_pending_lab(bed_id: str, item_id: str, correction: LabCorrection = Body(default=None)):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    pending = bed_lab_pending.get(bed_id, [])
+    match = next((c for c in pending if c["id"] == item_id), None)
+    if match is None:
+        raise HTTPException(status_code=404, detail="unknown pending item")
+    pending.remove(match)
+
+    correction = correction or LabCorrection()
+    result = {
+        "test": correction.test or match["test"],
+        "value": correction.value or match["value"] or "(unspecified)",
+        "unit": correction.unit or match["unit"],
+        "reference_range": correction.reference_range or match["reference_range"],
+        "flag": correction.flag or match["flag"],
+        "raw_line": match["raw_line"],
+        "sim_t": sim_t,
+    }
+    health_record.push_event(identity["abha_id"], "lab_result_approved", source=bed_id, sim_t=sim_t, payload=result)
+    return result
+
+
+@app.post("/api/beds/{bed_id}/labs/pending/{item_id}/reject")
+def reject_pending_lab(bed_id: str, item_id: str):
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    pending = bed_lab_pending.get(bed_id, [])
+    match = next((c for c in pending if c["id"] == item_id), None)
+    if match is None:
+        raise HTTPException(status_code=404, detail="unknown pending item")
+    pending.remove(match)
+    health_record.push_event(
+        identity["abha_id"], "lab_result_rejected", source=bed_id, sim_t=sim_t, payload={"raw_line": match["raw_line"]},
     )
     return {"rejected": True}
 

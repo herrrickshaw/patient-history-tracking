@@ -14,9 +14,9 @@ from datetime import datetime, timezone
 
 DISCLAIMER = (
     "Auto-generated demo discharge summary, compiled from simulated vitals, "
-    "alarms, medications, and insurance-connect data for this encounter. Not "
-    "a real clinical document, not reviewed by any clinician, and not "
-    "suitable for actual patient care."
+    "alarms, medications, reviewer-approved lab results, and insurance-connect "
+    "data for this encounter. Not a real clinical document, not reviewed by "
+    "any clinician, and not suitable for actual patient care."
 )
 
 VITAL_LABELS = {"HR": "Heart rate (bpm)", "SPO2": "SpO2 (%)", "NIBP_SBP": "NIBP systolic (mmHg)",
@@ -33,6 +33,7 @@ def build(
     alert_events: list[dict],
     medication_events: list[dict],
     claim: dict,
+    lab_events: list[dict] | None = None,
 ) -> dict:
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -49,6 +50,7 @@ def build(
         "vitals_range": vitals_range,
         "alerts": alert_events,
         "medications": medication_events,
+        "lab_results": lab_events or [],
         "insurance_claim": claim,
         "disclaimer": DISCLAIMER,
     }
@@ -80,6 +82,11 @@ def render_html(summary: dict) -> str:
         f"({_esc(e['payload']['route'])})</li>"
         for e in summary["medications"]
     ) or "<li>None recorded</li>"
+    lab_rows = "".join(
+        f"<tr><td>{_esc(e['payload']['test'])}</td><td>{_esc(e['payload']['value'])} {_esc(e['payload']['unit'] or '')}</td>"
+        f"<td>{_esc(e['payload']['reference_range'])}</td><td>{_esc(e['payload']['flag'])}</td></tr>"
+        for e in summary["lab_results"]
+    )
     claim = summary["insurance_claim"] or {}
 
     return f"""<!DOCTYPE html>
@@ -122,6 +129,10 @@ def render_html(summary: dict) -> str:
 
   <h2>Medications administered</h2>
   <ul>{med_rows}</ul>
+
+  <h2>Lab results (OCR-digitized, reviewer-approved)</h2>
+  {"<table><thead><tr><th>Test</th><th>Value</th><th>Reference range</th><th>Flag</th></tr></thead>"
+   f"<tbody>{lab_rows}</tbody></table>" if lab_rows else "<div>None recorded</div>"}
 
   <h2>Insurance (simulated)</h2>
   <div>{_esc(claim.get('insurer'))} &middot; claim {_esc(claim.get('claim_id'))} &middot;

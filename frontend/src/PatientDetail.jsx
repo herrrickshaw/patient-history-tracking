@@ -3,6 +3,8 @@ import IdCard from './IdCard.jsx'
 import InsuranceCard from './InsuranceCard.jsx'
 import PrescriptionTracker from './PrescriptionTracker.jsx'
 import PrescriptionOCR from './PrescriptionOCR.jsx'
+import LabResults from './LabResults.jsx'
+import LabOCR from './LabOCR.jsx'
 import DischargeSummaryPanel from './DischargeSummaryPanel.jsx'
 import HealthTimeline from './HealthTimeline.jsx'
 import WaveformCanvas from './WaveformCanvas.jsx'
@@ -16,6 +18,7 @@ export default function PatientDetail({ bedId, onClose }) {
   const [insurance, setInsurance] = useState(null)
   const [record, setRecord] = useState(null)
   const [prescriptions, setPrescriptions] = useState(null)
+  const [labs, setLabs] = useState(null)
   const [dischargeSummary, setDischargeSummary] = useState(null)
   const ecgBuffer = useRef(new Array(WAVEFORM_BUFFER_LEN).fill(null))
   const plethBuffer = useRef(new Array(WAVEFORM_BUFFER_LEN).fill(null))
@@ -28,6 +31,7 @@ export default function PatientDetail({ bedId, onClose }) {
     fetch(`${API_BASE}/api/beds/${bedId}/record`).then((r) => r.json()).then(setRecord)
     fetch(`${API_BASE}/api/beds/${bedId}/insurance`).then((r) => r.json()).then(setInsurance)
     fetch(`${API_BASE}/api/beds/${bedId}/prescriptions`).then((r) => r.json()).then(setPrescriptions)
+    fetch(`${API_BASE}/api/beds/${bedId}/labs`).then((r) => r.json()).then(setLabs)
     fetch(`${API_BASE}/api/beds/${bedId}/discharge-summary`).then((r) => r.json()).then(setDischargeSummary)
   }
 
@@ -83,6 +87,8 @@ export default function PatientDetail({ bedId, onClose }) {
 
       <PrescriptionTracker record={prescriptions} />
       <PrescriptionOCR bedId={bedId} onApproved={loadAll} />
+      <LabResults record={labs} />
+      <LabOCR bedId={bedId} onApproved={loadAll} />
       <DischargeSummaryPanel bedId={bedId} summary={dischargeSummary} />
       <HealthTimeline record={record} />
     </div>

@@ -391,3 +391,13 @@ body {
 .timeline-prescription_ocr_digitized .timeline-type,
 .timeline-prescription_ocr_approved .timeline-type { color: #4ea1ff; }
 .timeline-prescription_ocr_rejected .timeline-type { color: var(--muted); }
+
+/* ---- lab OCR + results ---- */
+.ocr-fields-lab { grid-template-columns: 1.6fr 1fr 0.8fr 1.2fr 0.8fr; }
+.rx-flag-high { color: var(--critical); font-weight: 600; }
+.rx-flag-low { color: var(--warning); font-weight: 600; }
+.rx-flag-normal { color: var(--ok); font-weight: 600; }
+.rx-flag-unknown { color: var(--muted); }
+.timeline-lab_report_digitized .timeline-type,
+.timeline-lab_result_approved .timeline-type { color: #4ea1ff; }
+.timeline-lab_result_rejected .timeline-type { color: var(--muted); }
