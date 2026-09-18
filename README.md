@@ -439,6 +439,47 @@ Only the *latest* encounter's summary is kept per bed
 (`discharge_summary.latest()`) — on the fast-cycle demo bed in
 particular, each new discharge overwrites what came before.
 
+## Real-world context: discharge summary vendors
+
+Background for anyone comparing this demo's `discharge_summary.py`
+to what already exists — reference material, not something the app
+implements or connects to.
+
+**India:** **[Rivara Health](https://rivarahealth.com/)** is the
+closest real-world match to this repo's whole loop, not just the
+document — built specifically for **ICU** doctors in India, it
+generates "medicolegal-grade" discharge summaries in under two
+minutes from a doctor photographing handwritten bedside charts and
+uploading lab reports, with AI extracting the clinical data
+automatically. That's the same
+photograph-→-OCR-→-structured-discharge-document pipeline this repo
+implements, aimed at the same ICU setting.
+
+There's also a formal government standard this repo's own discharge
+summary deliberately *doesn't* conform to: ABDM defines a
+**[`DischargeSummaryRecord`](https://nrces.in/ndhm/fhir/r4/StructureDefinition-DischargeSummaryRecord.html)**
+FHIR profile (maintained by NRCES, the National Resource Centre for
+EHR Standards) as one of its standard Health Information Types,
+alongside prescriptions and diagnostic reports — a hospital's HMIS is
+expected to package a real discharge summary as a FHIR Bundle in that
+shape before sharing it to a patient's ABHA/PHR app. A production
+version of this feature would target that profile; this demo's JSON
++ printable-HTML pair is illustrative only, not interoperable with
+real ABDM infrastructure.
+
+**Elsewhere:** ambient AI clinical-documentation tools — **Nuance DAX
+Copilot** (Microsoft, deep Epic/Cerner integration, 600+ health
+organizations), **Abridge**, and **Suki AI** — record a clinician
+encounter and draft structured notes, including discharge-adjacent
+documentation, rather than digitizing photographed paper records the
+way this repo and Rivara Health do. Worth noting because it's the
+same caution this repo's mandatory disclaimers exist for, reported
+independently in that space too: AI-generated notes can still miss
+clinically relevant details or hallucinate medications, and require
+physician review before signing — not a solved problem regardless of
+which input modality (voice vs. photographed chart) generates the
+draft.
+
 ## Swapping in a commercial OCR SDK later
 
 Local Tesseract is free and needs no credentials, but it's a generic
