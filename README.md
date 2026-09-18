@@ -693,8 +693,71 @@ React demo over an open research dataset.
   FHIR Implementation Guide for patient-monitoring resources, useful
   if this needs to standardize its data model later.
 
+## Real-world context: infrastructure this demo doesn't have
+
+Every "Real-world context" section above checked a real company's
+actual stack. Laid side by side, they all have infrastructure-layer
+components this repo doesn't — not code polish, whole categories of
+component. Grepping this repo's own code confirms the gaps:
+
+- **Persistence layer.** AcuteCare.ai and (per its own job postings)
+  Ayu Health run MySQL, Innovaccer runs PostgreSQL, Icanio runs
+  MongoDB. This repo has **no database** — `bed_prescriptions`,
+  `bed_ocr_pending`, `health_record._records`, everything, lives in
+  plain Python dicts in `main.py`/`health_record.py`. Restart the
+  process and every patient, discharge summary, and approved lab
+  result is gone.
+- **Authentication / authorization.** Zero anywhere in `main.py` — no
+  `Depends()`, no API keys, no sessions. Anyone who can reach port
+  8710 can approve a fabricated prescription or discharge a patient.
+  Real health software needs RBAC by regulatory default; this repo
+  has no concept of *who* clicked Approve.
+- **Containerization and a deploy story.** No Dockerfile, no
+  docker-compose, no IaC. Suki AI, Eka.Care, Icanio, and CitiusTech
+  job postings all list Docker/Kubernetes (Eka.Care adds Terraform).
+  This repo's only "deploy" step is `uvicorn app.main:app` on
+  localhost.
+- **Horizontal scalability.** A direct consequence of the first two:
+  state in module-level Python dicts means this app can only ever run
+  as a single process, where a stateless-services-plus-shared-DB
+  design can run N replicas behind a load balancer.
+- **CI/CD and automated tests.** No `.github/` directory, and no test
+  files belonging to this repo anywhere on disk (the only `test_*`
+  matches found live inside third-party `.venv`/`node_modules`
+  packages). Every company with public engineering job postings
+  implies a pipeline running tests before merge; this repo has
+  neither the tests nor the pipeline.
+- **A real device-integration engine.** AcuteCare.ai's CritIS runs
+  **Mirth Connect** for real HL7/FHIR traffic to bedside devices. This
+  repo's "device integration" is VitalDB case-file playback —
+  realistic-looking data, but no HL7v2/FHIR listener a real monitor
+  could ever connect to. ([OpenICE](https://github.com/mdpnp/mdpnp),
+  already in Reference Projects below, is the actual open-source
+  example of what a real interface engine looks like.)
+- **ML/AI inference infrastructure.** Suki AI lists a dedicated ML
+  stack (Vertex AI, PyTorch, JAX) for real speech/NLP inference;
+  Etiometry's entire product *is* an FDA-cleared ML risk-scoring
+  model. This repo's "AI" (`prescription_ocr.py`, `lab_ocr.py`) is
+  Tesseract OCR plus hand-written regex — no model training, no
+  inference service, no ML framework in `requirements.txt` at all.
+- **Native mobile clients.** Suki AI, Eka.Care, Dozee, vTitan, and Ayu
+  all ship native iOS/Android apps — which matters specifically for
+  bedside/ICU use, where a phone or tablet at the nurse's station is
+  the real interface. This repo is React-web-only.
+- **Observability.** Nothing beyond a bare `logging.info()` call — no
+  structured logging, metrics, tracing, or error tracking.
+
+The honest framing: this repo only builds the *application-layer
+logic* — alert rules, the OCR review workflow, discharge-summary
+aggregation, the insurance-claim state machine — and borrows VitalDB
+for realistic data instead of building the infrastructure layer
+underneath it. Every company checked in this README has that
+infrastructure layer; this repo has none of it, by design.
+
 ## Status
 
 Prototype/demo only. Not validated for clinical use, not a medical
 device, and the alarm thresholds in `backend/app/alerts.py` are
-illustrative defaults, not clinically reviewed limits.
+illustrative defaults, not clinically reviewed limits. See the
+infrastructure gaps immediately above for the concrete, specific
+version of what "prototype" means here.
