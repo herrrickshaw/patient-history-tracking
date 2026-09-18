@@ -88,6 +88,52 @@ The card carries a permanent "DEMO ID — not a real ABHA record" banner
 and disclaimer; nothing here calls, mimics, or could be confused with
 the real ABHA/NHA API.
 
+## Real-world context: the ABHA vendor ecosystem
+
+Background for anyone comparing this demo's ID card to how ABHA
+actually works — reference material, not something the app implements
+or connects to.
+
+The real ABHA number is a 14-digit ID (the same `XX-XXXX-XXXX-XXXX`
+shape this app's synthetic card imitates), but a citizen's day-to-day
+identifier is usually an **ABHA address** instead — a
+`username@handle` form (e.g. `xyz@abdm`), where the suffix names which
+**Consent Manager** brokers that person's data-sharing consent. As of
+2026, the National Health Authority (NHA) reports 380M+ ABHA IDs
+created, 480,000+ facilities in the Health Facility Registry, and
+950,000+ doctors in the Healthcare Professionals Registry.
+
+Three distinct roles make up the vendor ecosystem around that ID,
+and a single company can register as more than one:
+
+- **PHR apps** (Personal Health Records) — the apps citizens actually
+  use to create an ABHA address and view their own records. The
+  NHA-run `ABHA` app itself is one; PHR apps that store patient health
+  data must separately register with NHA.
+- **HIP** (Health Information Provider) — hospitals, labs, clinics,
+  pharmacies that hold and expose a patient's records into the
+  network.
+- **HIU** (Health Information User) — apps that request access to
+  those records, with the patient's consent.
+- **Consent Manager / HIE-CM** — the licensed broker that orchestrates
+  consent between HIPs and HIUs (the ABDM Gateway can itself act as
+  the default one, the `@abdm` suffix).
+
+**[Eka.Care](https://www.eka.care/services/abdm-enabling-ecosystems)**
+was one of the first private platforms to register as *both* a HIP and
+an HIU. The government has claimed roughly 800 companies onboarded
+onto ABDM overall, though no single public, itemized registry of every
+licensed Consent Manager turned up in research for this section — take
+that count as a government-stated figure, not something independently
+verified here.
+
+One easy mix-up worth flagging: India's 2023 Digital Personal Data
+Protection Act (DPDPA) introduces a *separate* "Consent Manager"
+concept, licensed by the Data Protection Board across all sectors, not
+just health — as of late 2026 its registration window had only just
+opened, so it's a different (and much newer) thing from the
+already-operating ABDM/health Consent Managers described above.
+
 ## Health record timeline
 
 `backend/app/health_record.py` is the continuity-of-care record every
