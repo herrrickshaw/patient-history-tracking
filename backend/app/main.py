@@ -5,6 +5,13 @@ dataset over a WebSocket, evaluates threshold alarms, and exposes a
 small REST surface for the bed roster -- the software layer an
 IntelliICU-style product puts on top of connected monitors, pumps, and
 ventilators.
+
+Persistent state (prescriptions, OCR review queues, vitals ranges,
+the health-record timeline, insurance records, discharge summaries)
+lives in SQLite via backend/app/db.py -- a restart resumes the same
+session instead of erasing it. Only the VitalDB case assignment
+(beds/bed_identities below) is recomputed fresh each startup, since
+it's a pure function of the case id and cheap to redo.
 """
 from __future__ import annotations
 
@@ -20,6 +27,7 @@ from pydantic import BaseModel
 
 from . import (
     alerts,
+    db,
     discharge_summary,
     health_record,
     insurance_connect,
@@ -50,16 +58,21 @@ app.add_middleware(
 
 beds: dict[str, vitals_source.BedSource] = {}
 bed_identities: dict[str, dict] = {}
-bed_prescriptions: dict[str, list[dict]] = {}
-bed_ocr_pending: dict[str, list[dict]] = {}
-bed_lab_pending: dict[str, list[dict]] = {}
-bed_vitals_accum: dict[str, dict[str, dict]] = {}
-bed_admit_t: dict[str, int] = {}
 VITALS_SNAPSHOT_EVERY_SIM_SEC = 60
 
 # Single shared sim-time clock so every connected client (the bed grid
 # and any open waveform detail views) plays back the same moment.
+# Persisted to SQLite (app_state) so a restart resumes instead of
+# rewinding to 0.
 sim_t = 0
+
+
+@app.on_event("startup")
+def init_persistence() -> None:
+    db.init_db()
+    global sim_t
+    sim_t = int(db.get_state("sim_t", "0"))
+    log.info("resuming sim clock at t=%s from persisted state", sim_t)
 
 
 @app.on_event("startup")
@@ -72,7 +85,7 @@ def load_beds() -> None:
         beds[bed_id] = vitals_source.BedSource(bed_id, case_id)
         identity = patient_identity.build_identity(bed_id, case_id)
         bed_identities[bed_id] = identity
-        _admit(bed_id, identity, sim_t=0)
+        _resume_or_admit(bed_id, identity)
 
     demo_case_id = case_ids[NUM_BEDS]
     log.info("loading %s <- VitalDB case %s (fast-cycle demo)", DEMO_BED_ID, demo_case_id)
@@ -81,7 +94,17 @@ def load_beds() -> None:
     demo_identity["name"] = f"{demo_identity['name']} (fast-cycle demo)"
     demo_identity["is_demo"] = True
     bed_identities[DEMO_BED_ID] = demo_identity
-    _admit(DEMO_BED_ID, demo_identity, sim_t=0)
+    _resume_or_admit(DEMO_BED_ID, demo_identity)
+
+
+def _resume_or_admit(bed_id: str, identity: dict) -> None:
+    """First-ever startup for this bed admits fresh; a restart with
+    existing persisted state (prescriptions already on file) resumes
+    the session in place instead of re-admitting over it."""
+    if db.get_prescriptions(bed_id):
+        log.info("%s has persisted state, resuming rather than re-admitting", bed_id)
+    else:
+        _admit(bed_id, identity, sim_t=sim_t)
 
 
 @app.on_event("startup")
@@ -89,17 +112,18 @@ async def start_clock() -> None:
     async def clock_loop():
         global sim_t
         last_alert_keys: dict[str, set[str]] = {bed_id: set() for bed_id in beds}
-        last_cycle: dict[str, int] = {bed_id: 0 for bed_id in beds}
+        last_cycle: dict[str, int] = {bed_id: sim_t // beds[bed_id].encounter_length for bed_id in beds}
         while True:
             await asyncio.sleep(REAL_TICK_SEC)
             sim_t += SIM_SECONDS_PER_TICK
+            db.set_state("sim_t", str(sim_t))
             _record_events(sim_t, last_alert_keys, last_cycle)
 
     asyncio.create_task(clock_loop())
 
 
 def _update_vitals_accum(bed_id: str, vitals: dict) -> None:
-    accum = bed_vitals_accum.setdefault(bed_id, {})
+    accum = db.get_bed_runtime(bed_id)["vitals_accum"]
     for key, value in vitals.items():
         if value is None:
             continue
@@ -107,11 +131,11 @@ def _update_vitals_accum(bed_id: str, vitals: dict) -> None:
         entry["min"] = min(entry["min"], value)
         entry["max"] = max(entry["max"], value)
         entry["last"] = value
+    db.set_bed_vitals_accum(bed_id, accum)
 
 
 def _admit(bed_id: str, identity: dict, sim_t: int) -> None:
-    bed_admit_t[bed_id] = sim_t
-    bed_vitals_accum[bed_id] = {}
+    db.set_bed_admit_t(bed_id, sim_t)
     health_record.push_event(
         identity["abha_id"], "admission", source=bed_id, sim_t=sim_t,
         payload={"department": identity["department"], "procedure": identity["procedure"]},
@@ -123,9 +147,8 @@ def _admit(bed_id: str, identity: dict, sim_t: int) -> None:
 
     orders = prescriptions.generate_orders(identity["department"])
     for order in orders:
-        if order["frequency_sim_sec"]:
-            order["next_due"] = sim_t + order["frequency_sim_sec"]
-    bed_prescriptions[bed_id] = orders
+        order["next_due"] = sim_t + order["frequency_sim_sec"] if order["frequency_sim_sec"] else None
+    db.insert_prescriptions(bed_id, orders)
     health_record.push_event(
         identity["abha_id"], "prescription_ordered", source=bed_id, sim_t=sim_t,
         payload={"drugs": [o["drug"] for o in orders]},
@@ -134,7 +157,7 @@ def _admit(bed_id: str, identity: dict, sim_t: int) -> None:
 
 def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
     abha_id = identity["abha_id"]
-    admitted_t = bed_admit_t.get(bed_id, 0)
+    admitted_t = db.get_bed_runtime(bed_id)["admit_t"]
     encounter_events = [e for e in health_record.get_timeline(abha_id) if admitted_t <= e["sim_t"] <= sim_t]
     alert_events = [e for e in reversed(encounter_events) if e["type"] == "alert_raised"]
     medication_events = [e for e in reversed(encounter_events) if e["type"] == "medication_administered"]
@@ -146,13 +169,12 @@ def _discharge(bed_id: str, identity: dict, sim_t: int) -> None:
     )
     health_record.push_event(abha_id, "insurance_claim_submitted", source=bed_id, sim_t=sim_t, payload=claim)
 
-    for order in bed_prescriptions.get(bed_id, []):
-        order["status"] = "discontinued"
+    db.discontinue_prescriptions(bed_id)
     health_record.push_event(abha_id, "prescription_discontinued", source=bed_id, sim_t=sim_t, payload={})
 
+    vitals_range = db.get_bed_runtime(bed_id)["vitals_accum"]
     discharge_summary.build(
-        identity, admitted_t, sim_t, bed_vitals_accum.get(bed_id, {}), alert_events, medication_events, claim,
-        lab_events,
+        identity, admitted_t, sim_t, vitals_range, alert_events, medication_events, claim, lab_events,
     )
     health_record.push_event(abha_id, "discharge_summary_ready", source=bed_id, sim_t=sim_t, payload={})
 
@@ -169,13 +191,13 @@ def _record_events(t: int, last_alert_keys: dict[str, set[str]], last_cycle: dic
             last_cycle[bed_id] = cycle
             last_alert_keys[bed_id] = set()  # new encounter, previous alarms don't carry over
 
-        for order in bed_prescriptions.get(bed_id, []):
-            if order["status"] == "active" and order["next_due"] is not None and t >= order["next_due"]:
+        for order in db.get_active_prescriptions(bed_id):
+            if order["next_due"] is not None and t >= order["next_due"]:
                 health_record.push_event(
                     abha_id, "medication_administered", source=bed_id, sim_t=t,
                     payload={"drug": order["drug"], "dose": order["dose"], "route": order["route"]},
                 )
-                order["next_due"] = t + order["frequency_sim_sec"]
+                db.mark_prescription_administered(order["id"], t + order["frequency_sim_sec"])
 
         vitals = src.tick(t)
         _update_vitals_accum(bed_id, vitals)
@@ -242,7 +264,7 @@ def bed_prescriptions_endpoint(bed_id: str):
         raise HTTPException(status_code=404, detail="unknown bed_id")
     return {
         "disclaimer": prescriptions.DISCLAIMER,
-        "orders": bed_prescriptions.get(bed_id, []),
+        "orders": db.get_prescriptions(bed_id),
     }
 
 
@@ -259,10 +281,10 @@ async def bed_prescriptions_ocr(bed_id: str, file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail=f"could not read image: {exc}") from exc
 
     candidates = prescription_ocr.parse_candidates(raw_text)
-    pending = bed_ocr_pending.setdefault(bed_id, [])
     for c in candidates:
-        c["id"] = uuid.uuid4().hex[:8]
-        pending.append(c)
+        item_id = uuid.uuid4().hex[:8]
+        db.add_pending(item_id, bed_id, "prescription", c)
+        c["id"] = item_id
 
     health_record.push_event(
         identity["abha_id"], "prescription_ocr_digitized", source=bed_id, sim_t=sim_t,
@@ -275,7 +297,7 @@ async def bed_prescriptions_ocr(bed_id: str, file: UploadFile = File(...)):
 def bed_prescriptions_pending(bed_id: str):
     if bed_id not in beds:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    return {"disclaimer": prescription_ocr.DISCLAIMER, "candidates": bed_ocr_pending.get(bed_id, [])}
+    return {"disclaimer": prescription_ocr.DISCLAIMER, "candidates": db.get_pending(bed_id, "prescription")}
 
 
 class PrescriptionCorrection(BaseModel):
@@ -290,11 +312,10 @@ def approve_pending_prescription(bed_id: str, item_id: str, correction: Prescrip
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    pending = bed_ocr_pending.get(bed_id, [])
-    match = next((c for c in pending if c["id"] == item_id), None)
+    match = db.get_pending_item(item_id, "prescription")
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
-    pending.remove(match)
+    db.remove_pending(item_id)
 
     correction = correction or PrescriptionCorrection()
     drug = correction.drug or match["drug"]
@@ -311,7 +332,7 @@ def approve_pending_prescription(bed_id: str, item_id: str, correction: Prescrip
         "next_due": sim_t + freq if freq else None,
         "source": "ocr",
     }
-    bed_prescriptions.setdefault(bed_id, []).append(order)
+    db.insert_prescriptions(bed_id, [order])
     health_record.push_event(
         identity["abha_id"], "prescription_ocr_approved", source=bed_id, sim_t=sim_t,
         payload={**order, "raw_line": match["raw_line"]},
@@ -324,11 +345,10 @@ def reject_pending_prescription(bed_id: str, item_id: str):
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    pending = bed_ocr_pending.get(bed_id, [])
-    match = next((c for c in pending if c["id"] == item_id), None)
+    match = db.get_pending_item(item_id, "prescription")
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
-    pending.remove(match)
+    db.remove_pending(item_id)
     health_record.push_event(
         identity["abha_id"], "prescription_ocr_rejected", source=bed_id, sim_t=sim_t,
         payload={"raw_line": match["raw_line"]},
@@ -349,10 +369,10 @@ async def bed_labs_ocr(bed_id: str, file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail=f"could not read image: {exc}") from exc
 
     candidates = lab_ocr.parse_candidates(raw_text)
-    pending = bed_lab_pending.setdefault(bed_id, [])
     for c in candidates:
-        c["id"] = uuid.uuid4().hex[:8]
-        pending.append(c)
+        item_id = uuid.uuid4().hex[:8]
+        db.add_pending(item_id, bed_id, "lab", c)
+        c["id"] = item_id
 
     health_record.push_event(
         identity["abha_id"], "lab_report_digitized", source=bed_id, sim_t=sim_t,
@@ -365,7 +385,7 @@ async def bed_labs_ocr(bed_id: str, file: UploadFile = File(...)):
 def bed_labs_pending(bed_id: str):
     if bed_id not in beds:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    return {"disclaimer": lab_ocr.DISCLAIMER, "candidates": bed_lab_pending.get(bed_id, [])}
+    return {"disclaimer": lab_ocr.DISCLAIMER, "candidates": db.get_pending(bed_id, "lab")}
 
 
 @app.get("/api/beds/{bed_id}/labs")
@@ -390,11 +410,10 @@ def approve_pending_lab(bed_id: str, item_id: str, correction: LabCorrection = B
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    pending = bed_lab_pending.get(bed_id, [])
-    match = next((c for c in pending if c["id"] == item_id), None)
+    match = db.get_pending_item(item_id, "lab")
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
-    pending.remove(match)
+    db.remove_pending(item_id)
 
     correction = correction or LabCorrection()
     result = {
@@ -415,11 +434,10 @@ def reject_pending_lab(bed_id: str, item_id: str):
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    pending = bed_lab_pending.get(bed_id, [])
-    match = next((c for c in pending if c["id"] == item_id), None)
+    match = db.get_pending_item(item_id, "lab")
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
-    pending.remove(match)
+    db.remove_pending(item_id)
     health_record.push_event(
         identity["abha_id"], "lab_result_rejected", source=bed_id, sim_t=sim_t, payload={"raw_line": match["raw_line"]},
     )

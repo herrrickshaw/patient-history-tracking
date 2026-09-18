@@ -13,10 +13,15 @@ Modelled on two real patterns, used here only as a design reference:
 This module invents everything -- insurer names, policy numbers,
 approval decisions -- and never calls a real insurer, payer network,
 or claims clearinghouse. No real financial transaction occurs.
+
+Backed by SQLite (backend/app/db.py) so eligibility/claim history
+survives a server restart.
 """
 from __future__ import annotations
 
 import hashlib
+
+from . import db
 
 DISCLAIMER = (
     "Simulated insurance connect, patterned after Germany's gematik TI "
@@ -33,11 +38,13 @@ _INSURERS = [
     "Bharosa Health Trust",
 ]
 
-_records: dict[str, dict] = {}
-
 
 def _hash_int(*parts: str) -> int:
     return int(hashlib.sha256("|".join(parts).encode()).hexdigest(), 16)
+
+
+def _insurer(abha_id: str) -> str:
+    return _INSURERS[_hash_int("insurer", abha_id) % len(_INSURERS)]
 
 
 def _policy_number(abha_id: str) -> str:
@@ -46,38 +53,36 @@ def _policy_number(abha_id: str) -> str:
 
 
 def check_eligibility(abha_id: str) -> dict:
-    insurer = _INSURERS[_hash_int("insurer", abha_id) % len(_INSURERS)]
+    existing = db.get_insurance_record(abha_id)
+    checks = (existing["_checks"] if existing else 0) + 1
+    insurer = _insurer(abha_id)
+    policy_number = _policy_number(abha_id)
     eligible = _hash_int("eligible", abha_id) % 20 != 0  # ~95% eligible
-    record = _records.setdefault(abha_id, {"insurer": insurer, "policy_number": _policy_number(abha_id)})
-    record["eligibility_status"] = "eligible" if eligible else "coverage_lapsed"
-    record["authorization_ref"] = f"AUTH-{_hash_int('auth', abha_id, str(record.get('_checks', 0))) % 10**8:08d}"
-    record["_checks"] = record.get("_checks", 0) + 1
-    return {
-        "insurer": record["insurer"],
-        "policy_number": record["policy_number"],
-        "status": record["eligibility_status"],
-        "authorization_ref": record["authorization_ref"],
-    }
+    status = "eligible" if eligible else "coverage_lapsed"
+    auth_ref = f"AUTH-{_hash_int('auth', abha_id, str(checks)) % 10**8:08d}"
+    db.upsert_insurance_eligibility(abha_id, insurer, policy_number, status, auth_ref, checks)
+    return {"insurer": insurer, "policy_number": policy_number, "status": status, "authorization_ref": auth_ref}
 
 
 def submit_claim(abha_id: str, encounter: dict) -> dict:
-    record = _records.setdefault(abha_id, {"insurer": _INSURERS[0], "policy_number": _policy_number(abha_id)})
-    claim_seq = record.get("_claims", 0) + 1
-    record["_claims"] = claim_seq
-    claim_id = f"CLM-{_hash_int('claim', abha_id, str(claim_seq)) % 10**10:010d}"
-    amount = 80 + (_hash_int("amount", abha_id, str(claim_seq)) % 420)  # illustrative units, currency intentionally unspecified
-    approved = _hash_int("approve", abha_id, str(claim_seq)) % 10 != 0  # ~90% auto-approved
+    existing = db.get_insurance_record(abha_id)
+    claims = (existing["_claims"] if existing else 0) + 1
+    insurer = _insurer(abha_id)
+    policy_number = _policy_number(abha_id)
+    claim_id = f"CLM-{_hash_int('claim', abha_id, str(claims)) % 10**10:010d}"
+    amount = 80 + (_hash_int("amount", abha_id, str(claims)) % 420)  # illustrative units, currency intentionally unspecified
+    approved = _hash_int("approve", abha_id, str(claims)) % 10 != 0  # ~90% auto-approved
     claim = {
         "claim_id": claim_id,
-        "insurer": record["insurer"],
+        "insurer": insurer,
         "amount_estimate": amount,
         "status": "approved" if approved else "under_review",
         "procedure": encounter.get("procedure"),
         "department": encounter.get("department"),
     }
-    record["last_claim"] = claim
+    db.upsert_insurance_claim(abha_id, insurer, policy_number, claim, claims)
     return claim
 
 
 def get_record(abha_id: str) -> dict | None:
-    return _records.get(abha_id)
+    return db.get_insurance_record(abha_id)

@@ -6,11 +6,16 @@ and the insurance-connect claim outcome.
 Illustrative demo document only. It is not a real clinical discharge
 summary, was not reviewed by any clinician, and must not be used for
 actual patient care.
+
+Backed by SQLite (backend/app/db.py) so past summaries survive a
+server restart instead of vanishing with the old in-memory dict.
 """
 from __future__ import annotations
 
 import html
 from datetime import datetime, timezone
+
+from . import db
 
 DISCLAIMER = (
     "Auto-generated demo discharge summary, compiled from simulated vitals, "
@@ -21,8 +26,6 @@ DISCLAIMER = (
 
 VITAL_LABELS = {"HR": "Heart rate (bpm)", "SPO2": "SpO2 (%)", "NIBP_SBP": "NIBP systolic (mmHg)",
                  "NIBP_DBP": "NIBP diastolic (mmHg)", "RR": "Resp. rate (/min)", "TEMP": "Temperature (°C)"}
-
-_summaries: dict[str, list[dict]] = {}
 
 
 def build(
@@ -54,13 +57,12 @@ def build(
         "insurance_claim": claim,
         "disclaimer": DISCLAIMER,
     }
-    _summaries.setdefault(identity["abha_id"], []).append(summary)
+    db.insert_discharge_summary(identity["abha_id"], summary["generated_at"], summary)
     return summary
 
 
 def latest(abha_id: str) -> dict | None:
-    items = _summaries.get(abha_id)
-    return items[-1] if items else None
+    return db.latest_discharge_summary(abha_id)
 
 
 def _esc(value) -> str:

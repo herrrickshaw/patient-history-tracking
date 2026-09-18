@@ -26,6 +26,44 @@ or credentialing gate, unlike PhysioNet's MIMIC-IV below). Numerics
 (HR, SpO2, NIBP, RR, Temp) are replayed at 4x speed on a 1-second
 tick.
 
+## Persistence layer
+
+`backend/app/db.py` — plain standard-library `sqlite3`, no ORM,
+matching the rest of this codebase's style. Added because every other
+piece of state used to live in module-level Python dicts, so
+restarting the server erased every patient, timeline event, and
+discharge summary; that's now fixed.
+
+- One connection (WAL mode) shared by the whole app; every write
+  commits immediately — this app's write volume (a handful of events
+  per sim-second) is nowhere near where that would matter.
+- Tables: `health_events` (the continuity-of-care timeline),
+  `prescriptions`, `ocr_pending` (the review queue shared by both OCR
+  features, discriminated by a `kind` column), `insurance_records`,
+  `discharge_summaries`, `bed_runtime` (per-bed admission time + the
+  running vitals min/max/last accumulator), and `app_state` (currently
+  just the sim-time clock, so a restart resumes playback instead of
+  rewinding to t=0).
+- `health_record.py`, `insurance_connect.py`, and `discharge_summary.py`
+  now read/write through `db.py` internally — their own function
+  signatures (`push_event`, `get_timeline`, `check_eligibility`,
+  `submit_claim`, `build`, `latest`, ...) didn't change, so every REST
+  endpoint that calls them needed no changes at all.
+- On startup, each bed checks whether it already has persisted
+  prescriptions; if so it resumes that session in place rather than
+  re-admitting over it (which would wipe the existing state and log a
+  spurious second admission). Verified this directly: restarted the
+  server mid-session and confirmed the sim clock resumed at its exact
+  prior value, an in-review OCR candidate was still in the pending
+  queue with the same id, and approving it afterward worked
+  identically to before the restart.
+- `backend/data/` (the `.db`/`-wal`/`-shm` files) is gitignored — it's
+  local runtime state, not something to commit.
+
+Still SQLite behind one process, not the Postgres/MySQL + horizontal
+scaling real companies run — see the infrastructure-gap section near
+the end of this README for what's still missing and why.
+
 ## VitalDB data attribution & license
 
 This app fetches VitalDB case data live via the `vitaldb` Python
@@ -698,15 +736,20 @@ React demo over an open research dataset.
 Every "Real-world context" section above checked a real company's
 actual stack. Laid side by side, they all have infrastructure-layer
 components this repo doesn't — not code polish, whole categories of
-component. Grepping this repo's own code confirms the gaps:
+component. Grepping this repo's own code confirms the gaps below —
+except the first one, which has since been closed (see
+[Persistence layer](#persistence-layer) near the top of this README):
 
-- **Persistence layer.** AcuteCare.ai and (per its own job postings)
-  Ayu Health run MySQL, Innovaccer runs PostgreSQL, Icanio runs
-  MongoDB. This repo has **no database** — `bed_prescriptions`,
-  `bed_ocr_pending`, `health_record._records`, everything, lives in
-  plain Python dicts in `main.py`/`health_record.py`. Restart the
-  process and every patient, discharge summary, and approved lab
-  result is gone.
+- ~~**Persistence layer.**~~ **Closed.** AcuteCare.ai and (per its own
+  job postings) Ayu Health run MySQL, Innovaccer runs PostgreSQL,
+  Icanio runs MongoDB — all a step up from what this repo now has,
+  SQLite behind a single process, but the state itself (prescriptions,
+  the health-record timeline, discharge summaries, insurance records)
+  now genuinely survives a restart instead of living in plain Python
+  dicts that reset to nothing. Still a gap relative to those
+  companies: no horizontal scalability (a direct consequence of
+  "single SQLite file, single process"), and the next bullet below —
+  auth — is unrelated to persistence and remains fully open.
 - **Authentication / authorization.** Zero anywhere in `main.py` — no
   `Depends()`, no API keys, no sessions. Anyone who can reach port
   8710 can approve a fabricated prescription or discharge a patient.
@@ -717,10 +760,12 @@ component. Grepping this repo's own code confirms the gaps:
   job postings all list Docker/Kubernetes (Eka.Care adds Terraform).
   This repo's only "deploy" step is `uvicorn app.main:app` on
   localhost.
-- **Horizontal scalability.** A direct consequence of the first two:
-  state in module-level Python dicts means this app can only ever run
-  as a single process, where a stateless-services-plus-shared-DB
-  design can run N replicas behind a load balancer.
+- **Horizontal scalability.** Persistence closed the "state resets on
+  restart" gap, but not this one: a single local SQLite file still
+  means this app can only ever run as one process, where a real
+  stateless-services-plus-shared-DB design (Postgres/MySQL reachable
+  over the network, like the companies above) can run N replicas
+  behind a load balancer.
 - **CI/CD and automated tests.** No `.github/` directory, and no test
   files belonging to this repo anywhere on disk (the only `test_*`
   matches found live inside third-party `.venv`/`node_modules`
@@ -747,12 +792,18 @@ component. Grepping this repo's own code confirms the gaps:
 - **Observability.** Nothing beyond a bare `logging.info()` call — no
   structured logging, metrics, tracing, or error tracking.
 
-The honest framing: this repo only builds the *application-layer
+The honest framing: this repo mostly builds the *application-layer
 logic* — alert rules, the OCR review workflow, discharge-summary
 aggregation, the insurance-claim state machine — and borrows VitalDB
 for realistic data instead of building the infrastructure layer
-underneath it. Every company checked in this README has that
-infrastructure layer; this repo has none of it, by design.
+underneath it. Persistence is the one piece of that infrastructure
+layer this repo now has, built the way this codebase builds
+everything (plain, minimal, matching the existing style) rather than
+matching any specific company's choice of Postgres/MySQL/MongoDB. The
+rest of the list above — auth, containerization, CI/tests, a real
+device-integration engine, ML inference, mobile clients,
+observability — every company checked in this README has; this repo
+still has none of it, by design, until asked for.
 
 ## Status
 

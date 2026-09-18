@@ -10,13 +10,16 @@ design reference:
     record that updates as care happens across providers.
 
 This module does not call, authenticate against, or claim to be either
-system -- it is an in-memory analogue for demo purposes only. No real
-insurer, government health-ID registry, or patient data is involved.
+system -- it is a local demo analogue only. No real insurer,
+government health-ID registry, or patient data is involved.
+
+Backed by SQLite (backend/app/db.py) so the timeline survives a
+server restart, unlike the plain in-memory dict this module used to
+keep.
 """
 from __future__ import annotations
 
-import time
-from collections import defaultdict
+from . import db
 
 DISCLAIMER = (
     "Simulated health information exchange, patterned after ABHA (India) and "
@@ -24,25 +27,10 @@ DISCLAIMER = (
     "Not connected to any real insurer, government registry, or health-ID system."
 )
 
-MAX_EVENTS_PER_PATIENT = 200
-
-_records: dict[str, list[dict]] = defaultdict(list)
-
 
 def push_event(abha_id: str, event_type: str, source: str, sim_t: int, payload: dict) -> None:
-    events = _records[abha_id]
-    events.append(
-        {
-            "wall_time": time.time(),
-            "sim_t": sim_t,
-            "type": event_type,
-            "source": source,
-            "payload": payload,
-        }
-    )
-    if len(events) > MAX_EVENTS_PER_PATIENT:
-        del events[: len(events) - MAX_EVENTS_PER_PATIENT]
+    db.push_health_event(abha_id, event_type, source, sim_t, payload)
 
 
 def get_timeline(abha_id: str) -> list[dict]:
-    return list(reversed(_records.get(abha_id, [])))
+    return db.get_health_timeline(abha_id)
