@@ -35,6 +35,58 @@ can do, at https://physionet.org. Once credentialed, swap
 `backend/app/vitals_source.py`'s VitalDB loader for a MIMIC-IV
 waveform reader; the bed/tick/alert interfaces don't need to change.
 
+## ABHA-style ID card
+
+Every bed carries a patient identity card (`backend/app/patient_identity.py`,
+rendered by `frontend/src/IdCard.jsx`) patterned after India's ABHA
+(Ayushman Bharat Health Account) — the linkage a real Indian hospital
+system shows on a patient's chart, and the ID everything else in this
+app (insurance, prescriptions, lab results, the timeline) is keyed by.
+
+Everything on the card is either real-but-anonymous or entirely
+invented, and it's split deliberately:
+
+- **Real**: age, sex, department, procedure, diagnosis, and ASA class
+  come straight from VitalDB's own de-identified clinical metadata for
+  that case (`vitaldb.load_clinical_data`) — genuine (if anonymous)
+  surgical case data, not fabricated.
+- **Invented**: the patient's name and the 14-digit ABHA-style number
+  (`XX-XXXX-XXXX-XXXX`) don't exist in VitalDB at all — a real patient
+  name and national health ID obviously aren't part of an open
+  research dataset — so both are generated deterministically from the
+  case id purely so the card has something to display.
+
+The card carries a permanent "DEMO ID — not a real ABHA record" banner
+and disclaimer; nothing here calls, mimics, or could be confused with
+the real ABHA/NHA API.
+
+## Health record timeline
+
+`backend/app/health_record.py` is the continuity-of-care record every
+other feature writes into: a per-patient, append-only timeline of
+events (admission, discharge, alerts raised/resolved, vitals
+snapshots, medications administered, insurance eligibility/claims, OCR
+digitize/approve/reject), keyed by the same ABHA ID as the ID card and
+capped at 200 events per patient.
+
+It's the same pattern behind two real systems, used only as a design
+reference — this module doesn't call, authenticate against, or claim
+to be either:
+
+- **India's ABDM/ABHA**: providers push encounter data into a health
+  record linked by ABHA number, retrievable across facilities.
+- **Germany's gematik Telematikinfrastruktur / elektronische
+  Patientenakte (ePA)**: statutory insurers keep a continuity-of-care
+  record that updates as care happens across providers.
+
+Rendered as the "Health information history" panel
+(`frontend/src/HealthTimeline.jsx`) in the patient detail view, and
+it's also where several other features get their data *from* rather
+than maintaining their own parallel store — e.g. approved lab results
+(`GET /api/beds/{bed_id}/labs`) and each encounter's alert/medication
+history in the discharge summary are both derived by filtering this
+timeline, not tracked separately.
+
 ## Fast-cycle demo bed
 
 `Bed-DEMO` (badged "FAST-CYCLE DEMO" in the grid) plays back a real
@@ -146,6 +198,30 @@ kind of silent, easy-to-miss failure a review step exists to catch.
 Frontend: `frontend/src/LabOCR.jsx` (upload + review) and
 `frontend/src/LabResults.jsx` (approved results table), inside the
 patient detail view next to the prescription tracker.
+
+## Swapping in a commercial OCR SDK later
+
+Local Tesseract is free and needs no credentials, but it's a generic
+OCR engine with no idea it's looking at a prescription or a lab
+report — real handwriting accuracy suffers accordingly (see the
+misreads documented above). A document-scanning SDK purpose-built for
+this ([Kaagaz](https://kaagaz.app/scanning-sdk) is one Indian example,
+among others such as Google Cloud Vision or AWS Textract) would likely
+do meaningfully better, at the cost of integration effort this repo
+doesn't include:
+
+- Kaagaz's SDK is mobile-native (Android/iOS, on-device processing)
+  and requires emailing their team for access and a commercial
+  agreement — not something obtainable or wireable in from here.
+- Cloud OCR services (Vision/Textract/Form Recognizer) need an API key
+  and send image data off-device, a real privacy tradeoff for medical
+  documents that local Tesseract avoids.
+
+If you get access to one of these, the integration point is the same
+shape either way: swap `prescription_ocr.extract_text()` /
+`lab_ocr.extract_text()` for a call to the new service; everything
+downstream (parsing, the pending-review queue, correction-on-approve)
+doesn't need to change.
 
 ## Running locally
 
