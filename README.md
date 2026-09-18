@@ -156,6 +156,54 @@ financial transaction occurs. Surfaced in the UI as the "Simulated
 Insurance Connect" card and folded into the same health-record
 timeline as every other encounter event.
 
+## Real-world context: the ABDM vendor ecosystem
+
+Background for anyone comparing this demo to what actually exists in
+India — this section is reference material, not something the app
+implements or connects to.
+
+Unlike most countries, India's *public* hospital system mostly runs
+software **built by government bodies themselves**, not bought from
+private EMR vendors:
+
+- **[e-Hospital](https://www.nic.gov.in/project/ehospital/)**, built
+  by NIC (National Informatics Centre, a government department under
+  MeitY), is the default HMIS across most government hospitals.
+- **[eSushrut](https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2156603&reg=3&lang=2)**,
+  built by C-DAC (a government R&D body), runs at all 17 AIIMS and
+  4,000+ facilities; a lighter `eSushrut@Clinic` variant targets
+  small/medium providers under ABDM.
+- **[CoWIN](https://www.undp.org/india/projects/winning-over-covid-cowin)**,
+  India's COVID vaccination platform, was built the same way — an
+  in-house government team (drawing on the Aadhaar/UPI/DigiLocker
+  "digital public goods" playbook) with UNDP support, not a private
+  vendor contract.
+
+Private companies participate in the ecosystem this app's insurance
+connect and OCR features are patterned after, in two different ways:
+
+- **Selling EMR/HMIS software to *private* hospitals** — the market
+  this repo's other reference projects and comparisons target:
+  Healthray, HealthPlix, KareXpert, and (with real international
+  export, unlike most of that list) [Attune Technologies](https://ehealth.eletsonline.com/2015/10/attune-software-technology-expands-beyond-india/),
+  which sells its own cloud EMR across 15 countries in the Middle
+  East, Africa, and Southeast Asia. ABDM-certified vendor lists (e.g.
+  [SIDH's network](https://www.sidh.co.in/emrvendors)) track which of
+  these meet the government's interoperability requirements.
+- **Getting paid directly by the government** as ABDM ecosystem
+  participants, via the National Health Authority's [Digital Health
+  Incentives Scheme (DHIS)](https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=1945911&reg=48&lang=2),
+  which pays a per-transaction incentive for linking hospitals, labs,
+  and pharmacies into ABDM. Named top performers include **Eka.Care
+  (Orbi Health)**, **Bajaj Finserv**, and **Paytm** — notably, two of
+  those are fintech/consumer companies rather than traditional
+  health-IT vendors, pulled in by the incentive structure itself.
+
+The Health Claims Exchange (HCX) piece this app's `insurance_connect.py`
+is patterned after is the standardisation layer for that second
+category — the eligibility-check/claim-submission protocol between
+providers and payers, linked by ABHA number.
+
 ## Prescription OCR digitization
 
 Upload a photo or scan of a written prescription and the backend
