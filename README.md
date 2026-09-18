@@ -250,6 +250,49 @@ is patterned after is the standardisation layer for that second
 category — the eligibility-check/claim-submission protocol between
 providers and payers, linked by ABHA number.
 
+## Real-world context: insurance connect vendors
+
+Background for anyone comparing this demo's `insurance_connect.py`
+(the eligibility-check-on-admission, claim-on-discharge cycle) to what
+already exists — reference material, not something the app implements
+or connects to.
+
+**India (NHCX):** the HCX layer mentioned above has a name — the
+**National Health Claims Exchange (NHCX)**, built by NHA in
+consultation with the insurance regulator (IRDAI) under ABDM, live
+since June 2024. As of May 2026, NHA reports **160 integrators and
+12,600+ hospitals** onboarded. NHCX itself is government-run
+infrastructure (the NHA/IRDAI role parallels e-Hospital/eSushrut in
+the earlier section) — the companies actually doing the
+eligibility-check and claim-submission work this app simulates are
+**Third-Party Administrators (TPAs)**, which process claims on behalf
+of insurers:
+
+- **[Medi Assist](https://www.mediassist.in/about/)** — India's
+  largest health-benefits administrator, listed on BSE/NSE, a 14,000+
+  hospital network, and (as of July 2025) owner of **Paramount Health
+  Services & Insurance TPA** after a full acquisition — so two of the
+  names you'll see in this space are now the same company.
+- **[Vidal Health](https://www.vidalhealthtpa.com/vidalhealthtpa)** —
+  formed by a merger with Vipul MedCorp Insurance TPA, 29 branch
+  offices, combined revenue around ₹200 crore.
+
+**Germany (gematik TI):** the same eligibility/claim pattern here maps
+onto gematik itself being the coordinating body (majority-owned by the
+Federal Ministry of Health since 2019, the NHA-equivalent role) rather
+than a vendor, while the actual **connector** software that hooks a
+clinic or insurer into the TI network is built and sold by certified
+vendors — **[CGM (CompuGroup Medical)](https://www.cgm.com/deu_de/loesungen/telematikinfrastruktur/produkte.html)**
+is the most visible one, offering both an on-premises TI connector and
+a hosted "CGM MANAGED TI" option, gematik-certified, in wide use since
+2017.
+
+In both countries the same shape recurs, and it's the shape this
+repo's `_admit`/`_discharge` functions follow: a government body
+defines the protocol and certifies participants, while separate
+commercial entities (TPAs in India, connector vendors in Germany)
+actually execute the eligibility checks and claim submissions.
+
 ## Prescription OCR digitization
 
 Upload a photo or scan of a written prescription and the backend
