@@ -435,20 +435,34 @@ implements or connects to.
   parameters/reference ranges from lab reports, and parses discharge
   summaries — the same three document types this demo digitizes,
   aimed at families organizing records at home rather than a hospital
-  system.
+  system. Its own engineering stack couldn't be confirmed — and
+  tellingly, a job-posting search for it surfaced a real stack (Java,
+  Dropwizard, MySQL, Ruby, Scala) for *Ayu Health*, the unrelated
+  hospital-network company this bullet already warns about. That's
+  deliberately **not** reported as Ayu's stack here; it's a live
+  demonstration of exactly the mix-up the disambiguation above exists
+  to prevent.
 - **[Eka.Care](https://www.eka.care/services/abdm-enabling-ecosystems)**
   (already the HIP+HIU example in the ABHA section above) also OCRs
   and structures lab reports as part of its PHR product.
 - **Icanio Technologies** builds AI record-digitization platforms for
   Indian *hospitals* specifically — the enterprise/B2B side of the
   same problem, including OCR for handwritten records, rather than the
-  consumer-app side Ayu and Eka.Care cover.
+  consumer-app side Ayu and Eka.Care cover. Its job postings list a
+  broad, generic full-stack/DevOps toolkit (Java/Python/JavaScript/C#,
+  MySQL/PostgreSQL/MongoDB, Docker/Kubernetes) rather than one specific
+  stack — consistent with being a general software-services company
+  (web, mobile, AI, cloud) for which healthcare digitization is one
+  case study among several, not a single-product healthcare company.
 - **[Docsumo](https://www.docsumo.com/solutions/idp-for-healthcare)**
   (Mumbai, founded 2019) is a general Intelligent Document Processing
   platform with a healthcare/insurance vertical — extracting structured
   data from medical reports, prior-authorization requests, and claims
   at enterprise scale, closer to insurer/payer back-office automation
-  than a hospital bedside tool.
+  than a hospital bedside tool. Job postings only thinly confirm a
+  **Python**-centric stack, mostly visible through solutions-engineering
+  roles (Python, REST APIs) rather than core-platform listings — not
+  enough to describe their full engineering stack with confidence.
 
 One number worth noting because it explains a real design choice this
 repo shares: reported OCR accuracy on **standard NABL-format** lab
@@ -509,7 +523,10 @@ minutes from a doctor photographing handwritten bedside charts and
 uploading lab reports, with AI extracting the clinical data
 automatically. That's the same
 photograph-→-OCR-→-structured-discharge-document pipeline this repo
-implements, aimed at the same ICU setting.
+implements, aimed at the same ICU setting. Unlike the other companies
+in this README, no job posting or engineering-stack detail for Rivara
+Health turned up in research for this section — small enough, or
+early enough, to leave no public trace of it yet.
 
 There's also a formal government standard this repo's own discharge
 summary deliberately *doesn't* conform to: ABDM defines a
@@ -535,6 +552,18 @@ clinically relevant details or hallucinate medications, and require
 physician review before signing — not a solved problem regardless of
 which input modality (voice vs. photographed chart) generates the
 draft.
+
+Both Abridge and Suki AI's engineering job postings are public and
+confirm real, mature stacks — Nuance DAX's aren't separately
+identifiable, having been absorbed into Microsoft's much larger job
+market. **Abridge**: **Node.js/TypeScript + React**, running on
+**Google Cloud (GCP)**. **Suki AI**: broader — **Go, C++, Python**
+backend, **React/TypeScript** web, native **Swift/Kotlin** mobile,
+**gRPC/GraphQL** APIs, all on **GCP + Kubernetes**, plus a distinct
+ML stack (**Vertex AI, PyTorch, JAX**) for the speech/NLP side — the
+kind of breadth you'd expect from an ambient-voice product that needs
+real-time mobile capture, backend transcription/NLP, and an EHR
+integration layer all at once.
 
 ## Swapping in a commercial OCR SDK later
 
