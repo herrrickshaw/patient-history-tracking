@@ -542,6 +542,11 @@ than just asserted:
   dashboard; Jeevantra layers an AI chatbot for handover/medication/
   fluid decision support on top. Now has its own site
   ([intelliicu.com](https://intelliicu.com/)) distinct from vtitan.com.
+  Their embedded-engineering job postings (Naukri) confirm the stack
+  the hardware side runs on: **C/C++** on **bare-metal and RTOS**
+  targeting **TI/ST microcontrollers**, over **I2C/SPI/UART/CAN** —
+  a firmware shop, not a typical web stack, which tracks with owning
+  the infusion-pump hardware rather than just the dashboard software.
 - **[Etiometry](https://www.etiometry.com/)** — US, founded 2010, roots
   in pediatric ICU/cardiac care, now holds **11 FDA clearances** as a
   regulated clinical decision-support device (most recently for
@@ -550,26 +555,46 @@ than just asserted:
   with a 30% reduction in mechanical ventilation duration and a 20%
   decrease in length of stay — real outcomes data behind a real
   regulatory approval, which is exactly the gap between this repo and
-  an actual medical device (see [Status](#status)).
+  an actual medical device (see [Status](#status)). Their software
+  stack couldn't be confirmed — no public job listing surfaced it, and
+  their careers page and LinkedIn job listings sit behind a login wall
+  — so unlike the other three, nothing is asserted about it here.
 - **[Dozee](https://www.dozeehealth.ai/for-hospitals)** — Indian
   contactless remote patient monitoring company: a under-mattress
   sensor turns any bed into a monitored one, no wires or cuffs. In
   named use at Apollo Hospitals, Wockhardt Hospitals, Breach Candy
   Hospital, and Vijaya Medical, with a `dozee.us` presence suggesting
-  US expansion too.
+  US expansion too. A Bangalore firmware-engineer listing confirms the
+  sensor side runs on **C/C++** as well, for their proprietary
+  ballistocardiography hardware — the same embedded-firmware pattern
+  as vTitan, for the same reason: they own physical sensor hardware,
+  not just software.
 - **[AcuteCare.ai (CritIS)](https://www.acutecare.ai/en/about)** —
   originally a 2017 spin-off of the University of Crete (Greece),
   leading ICU/anaesthesia software provider at Greece's largest public
   university hospitals; **CritIS Tele-ICU** (the module named in this
   repo's opening line) is one module of their broader **CritIS
   Synergy+** platform. Partnered with Sievestone LTD in 2024 to expand
-  globally beyond Greece.
+  globally beyond Greece. No job listing surfaced their stack, but
+  their own [Technology Partners page](https://acutecare.ai/en/Technology-Partners)
+  states it directly: **Java** backend, **Mirth Connect** for
+  real-time HL7/FHIR interoperability, **MySQL** for storage, and the
+  Java-based **CaptainCasa Enterprise Client Framework** for the UI —
+  an enterprise-Java shape, unsurprising for software integrating with
+  hospital IT rather than owning bedside hardware the way vTitan and
+  Dozee do.
 
 The common thread across all four: they're real, regulated (in
 Etiometry's case, FDA-cleared) medical products deployed in named
 hospitals, built by teams with device-integration and clinical
 partnerships this repo has none of. That gap is deliberate — see
-[Status](#status) for what this repo is and isn't.
+[Status](#status) for what this repo is and isn't. Their stacks also
+split cleanly along that same line: the two companies that own
+physical sensor/pump hardware (vTitan, Dozee) run embedded C/C++
+firmware, while the one that's pure integration software (AcuteCare.ai)
+runs an enterprise Java/HL7 stack — this repo, with no real hardware
+and no real hospital integration, is neither, just a Python/FastAPI +
+React demo over an open research dataset.
 
 ## Reference projects this borrows ideas from
 
