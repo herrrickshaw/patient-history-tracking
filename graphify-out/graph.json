@@ -1,0 +1,6326 @@
+{
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "failed_sources": [],
+  "extracted_sources": [
+    "/Users/umashankar/icu-dashboard-analogue/.claude/launch.json",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/__init__.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/alerts.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/db.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/discharge_summary.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/health_record.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/insurance_connect.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/lab_ocr.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/main.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/patient_identity.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/prescription_ocr.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/prescriptions.py",
+    "/Users/umashankar/icu-dashboard-analogue/backend/app/vitals_source.py",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/.oxlintrc.json",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/package.json",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/App.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/DischargeSummaryPanel.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/HealthTimeline.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/IdCard.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/InsuranceCard.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/LabOCR.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/LabResults.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/PatientDetail.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/PatientTile.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/PrescriptionOCR.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/PrescriptionTracker.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/WaveformCanvas.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/src/main.jsx",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/vite.config.js",
+    "/Users/umashankar/icu-dashboard-analogue/README.md",
+    "/Users/umashankar/icu-dashboard-analogue/frontend/README.md"
+  ],
+  "nodes": [
+    {
+      "id": "backend_app_init",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "backend/app/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_alerts",
+      "label": "alerts.py",
+      "file_type": "code",
+      "source_file": "backend/app/alerts.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_alerts_evaluate",
+      "label": "evaluate()",
+      "file_type": "code",
+      "source_file": "backend/app/alerts.py",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_alerts_rationale_1",
+      "label": "Threshold-based alarm rules, the same style of logic IntelliICU-class…",
+      "file_type": "rationale",
+      "source_file": "backend/app/alerts.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db",
+      "label": "db.py",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_conn",
+      "label": "get_conn()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "connection",
+      "label": "Connection",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_init_db",
+      "label": "init_db()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L103",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_state",
+      "label": "get_state()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L111",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_set_state",
+      "label": "set_state()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L116",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_bed_runtime",
+      "label": "get_bed_runtime()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L127",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_set_bed_admit_t",
+      "label": "set_bed_admit_t()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L134",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_set_bed_vitals_accum",
+      "label": "set_bed_vitals_accum()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L144",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_push_health_event",
+      "label": "push_health_event()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L159",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_health_timeline",
+      "label": "get_health_timeline()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L175",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_insert_prescriptions",
+      "label": "insert_prescriptions()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L195",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_prescription_row_to_dict",
+      "label": "_prescription_row_to_dict()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L208",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "row",
+      "label": "Row",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_prescriptions",
+      "label": "get_prescriptions()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L221",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_active_prescriptions",
+      "label": "get_active_prescriptions()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L226",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_discontinue_prescriptions",
+      "label": "discontinue_prescriptions()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L233",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_mark_prescription_administered",
+      "label": "mark_prescription_administered()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L239",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_add_pending",
+      "label": "add_pending()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L247",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_pending",
+      "label": "get_pending()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L256",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_pending_item",
+      "label": "get_pending_item()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L268",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_remove_pending",
+      "label": "remove_pending()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L279",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_get_insurance_record",
+      "label": "get_insurance_record()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L287",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_upsert_insurance_eligibility",
+      "label": "upsert_insurance_eligibility()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L302",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_upsert_insurance_claim",
+      "label": "upsert_insurance_claim()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L316",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_insert_discharge_summary",
+      "label": "insert_discharge_summary()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L330",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_latest_discharge_summary",
+      "label": "latest_discharge_summary()",
+      "file_type": "code",
+      "source_file": "backend/app/db.py",
+      "source_location": "L339",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_db_rationale_1",
+      "label": "SQLite persistence layer. Replaces the plain-Python-dict state every other…",
+      "file_type": "rationale",
+      "source_file": "backend/app/db.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_discharge_summary",
+      "label": "discharge_summary.py",
+      "file_type": "code",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_discharge_summary_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_discharge_summary_latest",
+      "label": "latest()",
+      "file_type": "code",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L64",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_discharge_summary_esc",
+      "label": "_esc()",
+      "file_type": "code",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L68",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_discharge_summary_render_html",
+      "label": "render_html()",
+      "file_type": "code",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L72",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_discharge_summary_rationale_1",
+      "label": "Generates a discharge summary document at the end of each encounter, compiled…",
+      "file_type": "rationale",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_health_record",
+      "label": "health_record.py",
+      "file_type": "code",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_health_record_push_event",
+      "label": "push_event()",
+      "file_type": "code",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_health_record_get_timeline",
+      "label": "get_timeline()",
+      "file_type": "code",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_health_record_rationale_1",
+      "label": "Continuity-of-care record: a per-patient timeline that care events get pushed…",
+      "file_type": "rationale",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect",
+      "label": "insurance_connect.py",
+      "file_type": "code",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect_hash_int",
+      "label": "_hash_int()",
+      "file_type": "code",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L42",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect_insurer",
+      "label": "_insurer()",
+      "file_type": "code",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect_policy_number",
+      "label": "_policy_number()",
+      "file_type": "code",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L50",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect_check_eligibility",
+      "label": "check_eligibility()",
+      "file_type": "code",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L55",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect_submit_claim",
+      "label": "submit_claim()",
+      "file_type": "code",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L67",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect_get_record",
+      "label": "get_record()",
+      "file_type": "code",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L87",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_insurance_connect_rationale_1",
+      "label": "Synthetic insurance-connect layer, keyed by the same (fake) ABHA ID as…",
+      "file_type": "rationale",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_lab_ocr",
+      "label": "lab_ocr.py",
+      "file_type": "code",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_lab_ocr_extract_text",
+      "label": "extract_text()",
+      "file_type": "code",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_lab_ocr_parse_candidates",
+      "label": "parse_candidates()",
+      "file_type": "code",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L51",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_lab_ocr_rationale_1",
+      "label": "OCR-assisted digitization of a photographed/scanned lab report, using local…",
+      "file_type": "rationale",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main",
+      "label": "main.py",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "on_event",
+      "label": "on_event",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_init_persistence",
+      "label": "init_persistence()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L71",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_load_beds",
+      "label": "load_beds()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L79",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_resume_or_admit",
+      "label": "_resume_or_admit()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L100",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_start_clock",
+      "label": "start_clock()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L111",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_start_clock_clock_loop",
+      "label": "clock_loop()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L112",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_update_vitals_accum",
+      "label": "_update_vitals_accum()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L125",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_admit",
+      "label": "_admit()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L137",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_discharge",
+      "label": "_discharge()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L158",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_record_events",
+      "label": "_record_events()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L182",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "get",
+      "label": "get",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_list_beds",
+      "label": "list_beds()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L222",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_health",
+      "label": "health()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L236",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_identity",
+      "label": "bed_identity()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L241",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_insurance",
+      "label": "bed_insurance()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L249",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_prescriptions_endpoint",
+      "label": "bed_prescriptions_endpoint()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L262",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "post",
+      "label": "post",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_prescriptions_ocr",
+      "label": "bed_prescriptions_ocr()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L272",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "uploadfile",
+      "label": "UploadFile",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_prescriptions_pending",
+      "label": "bed_prescriptions_pending()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L297",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_prescriptioncorrection",
+      "label": "PrescriptionCorrection",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L303",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "basemodel",
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_approve_pending_prescription",
+      "label": "approve_pending_prescription()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L311",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_reject_pending_prescription",
+      "label": "reject_pending_prescription()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L344",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_labs_ocr",
+      "label": "bed_labs_ocr()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L360",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_labs_pending",
+      "label": "bed_labs_pending()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L385",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_labs",
+      "label": "bed_labs()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L392",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_labcorrection",
+      "label": "LabCorrection",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L400",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_approve_pending_lab",
+      "label": "approve_pending_lab()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L409",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_reject_pending_lab",
+      "label": "reject_pending_lab()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L433",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_discharge_summary",
+      "label": "bed_discharge_summary()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L448",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_discharge_summary_html",
+      "label": "bed_discharge_summary_html()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L459",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_bed_record",
+      "label": "bed_record()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L470",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "websocket",
+      "label": "websocket",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_ws_vitals",
+      "label": "ws_vitals()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L482",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_ws_waveform",
+      "label": "ws_waveform()",
+      "file_type": "code",
+      "source_file": "backend/app/main.py",
+      "source_location": "L511",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_rationale_1",
+      "label": "ICU dashboard analogue backend. Streams real (de-identified) bedside-monitor…",
+      "file_type": "rationale",
+      "source_file": "backend/app/main.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_main_rationale_101",
+      "label": "First-ever startup for this bed admits fresh; a restart with existing persisted…",
+      "file_type": "rationale",
+      "source_file": "backend/app/main.py",
+      "source_location": "L101",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_patient_identity",
+      "label": "patient_identity.py",
+      "file_type": "code",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_patient_identity_clinical_row",
+      "label": "_clinical_row()",
+      "file_type": "code",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_patient_identity_synthetic_abha_id",
+      "label": "_synthetic_abha_id()",
+      "file_type": "code",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L38",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_patient_identity_synthetic_name",
+      "label": "_synthetic_name()",
+      "file_type": "code",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L44",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_patient_identity_build_identity",
+      "label": "build_identity()",
+      "file_type": "code",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L50",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_patient_identity_rationale_1",
+      "label": "Synthetic patient-identity card, standing in for the ABHA (Ayushman Bharat…",
+      "file_type": "rationale",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_prescription_ocr",
+      "label": "prescription_ocr.py",
+      "file_type": "code",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_prescription_ocr_extract_text",
+      "label": "extract_text()",
+      "file_type": "code",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_prescription_ocr_parse_candidates",
+      "label": "parse_candidates()",
+      "file_type": "code",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L51",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_prescription_ocr_rationale_1",
+      "label": "OCR-assisted digitization of a photographed/scanned doctor's prescription,…",
+      "file_type": "rationale",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_prescriptions",
+      "label": "prescriptions.py",
+      "file_type": "code",
+      "source_file": "backend/app/prescriptions.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_prescriptions_generate_orders",
+      "label": "generate_orders()",
+      "file_type": "code",
+      "source_file": "backend/app/prescriptions.py",
+      "source_location": "L29",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_prescriptions_rationale_1",
+      "label": "Synthetic medication/prescription tracker for the current encounter. Drug names…",
+      "file_type": "rationale",
+      "source_file": "backend/app/prescriptions.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source",
+      "label": "vitals_source.py",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_bedsource",
+      "label": "BedSource",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L49",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_bedsource_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L56",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_bedsource_tick",
+      "label": ".tick()",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L73",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_bedsource_ensure_waveform_loaded",
+      "label": ".ensure_waveform_loaded()",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L77",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_bedsource_waveform_window",
+      "label": ".waveform_window()",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L84",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_mask_implausible",
+      "label": "_mask_implausible()",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L97",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "ndarray",
+      "label": "ndarray",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_forward_fill",
+      "label": "_forward_fill()",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L109",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_pick_case_ids",
+      "label": "pick_case_ids()",
+      "file_type": "code",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L121",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_rationale_1",
+      "label": "Loads real bedside-monitor waveforms from VitalDB's open dataset…",
+      "file_type": "rationale",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_rationale_50",
+      "label": "Replays one VitalDB case's numeric vitals as a fixed-interval series. Bedside…",
+      "file_type": "rationale",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L50",
+      "_origin": "ast"
+    },
+    {
+      "id": "backend_app_vitals_source_rationale_85",
+      "label": "Samples for sim-time half-open interval [sim_t_start, sim_t_end), wrapped to…",
+      "file_type": "rationale",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L85",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_oxlintrc",
+      "label": ".oxlintrc.json",
+      "file_type": "code",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_oxlintrc_schema",
+      "label": "$schema",
+      "file_type": "code",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_oxlintrc_plugins",
+      "label": "plugins",
+      "file_type": "code",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_oxlintrc_rules",
+      "label": "rules",
+      "file_type": "code",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_oxlintrc_rules_react_rules_of_hooks",
+      "label": "react/rules-of-hooks",
+      "file_type": "code",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_oxlintrc_rules_react_only_export_components",
+      "label": "react/only-export-components",
+      "file_type": "code",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package",
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_name",
+      "label": "name",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_private",
+      "label": "private",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_version",
+      "label": "version",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_type",
+      "label": "type",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_scripts",
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_scripts_dev",
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_scripts_build",
+      "label": "build",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_scripts_lint",
+      "label": "lint",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_scripts_preview",
+      "label": "preview",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_dependencies",
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_dependencies_react",
+      "label": "react",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_react",
+      "label": "react",
+      "file_type": "concept",
+      "source_file": "frontend/package.json",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_dependencies_react_dom",
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_react_dom",
+      "label": "react-dom",
+      "file_type": "concept",
+      "source_file": "frontend/package.json",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_devdependencies",
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_devdependencies_types_react",
+      "label": "@types/react",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_types_react",
+      "label": "@types/react",
+      "file_type": "concept",
+      "source_file": "frontend/package.json",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_devdependencies_types_react_dom",
+      "label": "@types/react-dom",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_types_react_dom",
+      "label": "@types/react-dom",
+      "file_type": "concept",
+      "source_file": "frontend/package.json",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_devdependencies_vitejs_plugin_react",
+      "label": "@vitejs/plugin-react",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_vitejs_plugin_react",
+      "label": "@vitejs/plugin-react",
+      "file_type": "concept",
+      "source_file": "frontend/package.json",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_devdependencies_oxlint",
+      "label": "oxlint",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_oxlint",
+      "label": "oxlint",
+      "file_type": "concept",
+      "source_file": "frontend/package.json",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_package_devdependencies_vite",
+      "label": "vite",
+      "file_type": "code",
+      "source_file": "frontend/package.json",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_vite",
+      "label": "vite",
+      "file_type": "concept",
+      "source_file": "frontend/package.json",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_app",
+      "label": "App.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_app_app",
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L9",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_app_app_connect",
+      "label": "connect()",
+      "file_type": "code",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L19",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_dischargesummarypanel",
+      "label": "DischargeSummaryPanel.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/DischargeSummaryPanel.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_dischargesummarypanel_vital_labels",
+      "label": "VITAL_LABELS",
+      "file_type": "code",
+      "source_file": "frontend/src/DischargeSummaryPanel.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_dischargesummarypanel_dischargesummarypanel",
+      "label": "DischargeSummaryPanel()",
+      "file_type": "code",
+      "source_file": "frontend/src/DischargeSummaryPanel.jsx",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_healthtimeline",
+      "label": "HealthTimeline.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_healthtimeline_type_labels",
+      "label": "TYPE_LABELS",
+      "file_type": "code",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_healthtimeline_describe",
+      "label": "describe()",
+      "file_type": "code",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_healthtimeline_healthtimeline",
+      "label": "HealthTimeline()",
+      "file_type": "code",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L64",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_idcard",
+      "label": "IdCard.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/IdCard.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_idcard_idcard",
+      "label": "IdCard()",
+      "file_type": "code",
+      "source_file": "frontend/src/IdCard.jsx",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_insurancecard",
+      "label": "InsuranceCard.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/InsuranceCard.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_insurancecard_status_label",
+      "label": "STATUS_LABEL",
+      "file_type": "code",
+      "source_file": "frontend/src/InsuranceCard.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_insurancecard_insurancecard",
+      "label": "InsuranceCard()",
+      "file_type": "code",
+      "source_file": "frontend/src/InsuranceCard.jsx",
+      "source_location": "L8",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_labocr",
+      "label": "LabOCR.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/LabOCR.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_labocr_candidaterow",
+      "label": "CandidateRow()",
+      "file_type": "code",
+      "source_file": "frontend/src/LabOCR.jsx",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_labocr_labocr",
+      "label": "LabOCR()",
+      "file_type": "code",
+      "source_file": "frontend/src/LabOCR.jsx",
+      "source_location": "L53",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_labresults",
+      "label": "LabResults.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/LabResults.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_labresults_labresults",
+      "label": "LabResults()",
+      "file_type": "code",
+      "source_file": "frontend/src/LabResults.jsx",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patientdetail",
+      "label": "PatientDetail.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patientdetail_patientdetail",
+      "label": "PatientDetail()",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L16",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patientdetail_patientdetail_connect",
+      "label": "connect()",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L50",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patienttile",
+      "label": "PatientTile.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patienttile_vital_labels",
+      "label": "VITAL_LABELS",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patienttile_vital_units",
+      "label": "VITAL_UNITS",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patienttile_levelforvital",
+      "label": "levelForVital()",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patienttile_sparkline",
+      "label": "Sparkline()",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L22",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_patienttile_patienttile",
+      "label": "PatientTile()",
+      "file_type": "code",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L44",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_prescriptionocr",
+      "label": "PrescriptionOCR.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/PrescriptionOCR.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_prescriptionocr_candidaterow",
+      "label": "CandidateRow()",
+      "file_type": "code",
+      "source_file": "frontend/src/PrescriptionOCR.jsx",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_prescriptionocr_prescriptionocr",
+      "label": "PrescriptionOCR()",
+      "file_type": "code",
+      "source_file": "frontend/src/PrescriptionOCR.jsx",
+      "source_location": "L54",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_prescriptiontracker",
+      "label": "PrescriptionTracker.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/PrescriptionTracker.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_prescriptiontracker_status_label",
+      "label": "STATUS_LABEL",
+      "file_type": "code",
+      "source_file": "frontend/src/PrescriptionTracker.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_prescriptiontracker_prescriptiontracker",
+      "label": "PrescriptionTracker()",
+      "file_type": "code",
+      "source_file": "frontend/src/PrescriptionTracker.jsx",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_waveformcanvas",
+      "label": "WaveformCanvas.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/WaveformCanvas.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_waveformcanvas_waveformcanvas",
+      "label": "WaveformCanvas()",
+      "file_type": "code",
+      "source_file": "frontend/src/WaveformCanvas.jsx",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_waveformcanvas_waveformcanvas_draw",
+      "label": "draw()",
+      "file_type": "code",
+      "source_file": "frontend/src/WaveformCanvas.jsx",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_src_main",
+      "label": "main.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/main.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_vite_config",
+      "label": "vite.config.js",
+      "file_type": "code",
+      "source_file": "frontend/vite.config.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme",
+      "label": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_icu_dashboard_analogue",
+      "label": "ICU Dashboard Analogue",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_architecture",
+      "label": "Architecture",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_persistence_layer",
+      "label": "Persistence layer",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_vitaldb_data_attribution_license",
+      "label": "VitalDB data attribution & license",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L67",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_swapping_in_mimic_iv_real_icu_data_later",
+      "label": "Swapping in MIMIC-IV / real ICU data later",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L94",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_abha_style_id_card",
+      "label": "ABHA-style ID card",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L104",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_the_abha_vendor_ecosystem",
+      "label": "Real-world context: the ABHA vendor ecosystem",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L129",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_health_record_timeline",
+      "label": "Health record timeline",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L179",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_fast_cycle_demo_bed",
+      "label": "Fast-cycle demo bed",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L206",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_insurance_connect_simulated",
+      "label": "Insurance connect (simulated)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L222",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_the_abdm_vendor_ecosystem",
+      "label": "Real-world context: the ABDM vendor ecosystem",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L247",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_indian_emr_export_company_tech_stacks",
+      "label": "Real-world context: Indian EMR export company tech stacks",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L302",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_insurance_connect_vendors",
+      "label": "Real-world context: insurance connect vendors",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L347",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_prescription_ocr_digitization",
+      "label": "Prescription OCR digitization",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L390",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_lab_report_ocr_digitization",
+      "label": "Lab report OCR digitization",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L425",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_lab_report_digitization_vendors",
+      "label": "Real-world context: lab report digitization vendors",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L461",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_discharge_summary_generator",
+      "label": "Discharge summary generator",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L516",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_discharge_summary_vendors",
+      "label": "Real-world context: discharge summary vendors",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L550",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_swapping_in_a_commercial_ocr_sdk_later",
+      "label": "Swapping in a commercial OCR SDK later",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L606",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_running_locally",
+      "label": "Running locally",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L630",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_icu_dashboard_competitors",
+      "label": "Real-world context: ICU dashboard competitors",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L654",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_reference_projects_this_borrows_ideas_from",
+      "label": "Reference projects this borrows ideas from",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L722",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_real_world_context_infrastructure_this_demo_doesn_t_have",
+      "label": "Real-world context: infrastructure this demo doesn't have",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L734",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_status",
+      "label": "Status",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L808",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_readme",
+      "label": "frontend/README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "frontend/README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_readme_react_vite",
+      "label": "React + Vite",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "frontend/README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_readme_react_compiler",
+      "label": "React Compiler",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "frontend/README.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "frontend_readme_expanding_the_oxlint_configuration",
+      "label": "Expanding the Oxlint configuration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "frontend/README.md",
+      "source_location": "L14",
+      "_origin": "ast"
+    }
+  ],
+  "links": [
+    {
+      "source": "backend_app_alerts",
+      "target": "backend_app_alerts_evaluate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/alerts.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_alerts_rationale_1",
+      "target": "backend_app_alerts",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/alerts.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "sqlite3",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_conn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_conn",
+      "target": "connection",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_init_db",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_state",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_set_state",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_bed_runtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L127",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_set_bed_admit_t",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L134",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_set_bed_vitals_accum",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_push_health_event",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L159",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_health_timeline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L175",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_insert_prescriptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_prescription_row_to_dict",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_prescription_row_to_dict",
+      "target": "row",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_prescriptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L221",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_active_prescriptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L226",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_discontinue_prescriptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L233",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_mark_prescription_administered",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L239",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_add_pending",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L247",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_pending",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L256",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_pending_item",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L268",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_remove_pending",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L279",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_get_insurance_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_upsert_insurance_eligibility",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L302",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_upsert_insurance_claim",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L316",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_insert_discharge_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L330",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db",
+      "target": "backend_app_db_latest_discharge_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L339",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_init_db",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_state",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_set_state",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_bed_runtime",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L128",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_set_bed_admit_t",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_set_bed_vitals_accum",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_push_health_event",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_health_timeline",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L176",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_insert_prescriptions",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L196",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_prescriptions",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L222",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_prescriptions",
+      "target": "backend_app_db_prescription_row_to_dict",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L223",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_active_prescriptions",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L227",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_active_prescriptions",
+      "target": "backend_app_db_prescription_row_to_dict",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L230",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_discontinue_prescriptions",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L234",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_mark_prescription_administered",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L240",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_add_pending",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L248",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_pending",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L257",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_pending_item",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L269",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_remove_pending",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L280",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_get_insurance_record",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L288",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_upsert_insurance_eligibility",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L303",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_upsert_insurance_claim",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L317",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_insert_discharge_summary",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L331",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_latest_discharge_summary",
+      "target": "backend_app_db_get_conn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L340",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_db_rationale_1",
+      "target": "backend_app_db",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/db.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "html",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "backend_app_init",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "backend_app_discharge_summary_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "backend_app_discharge_summary_latest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "backend_app_discharge_summary_esc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "backend_app_discharge_summary_render_html",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary_render_html",
+      "target": "backend_app_discharge_summary_esc",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary_rationale_1",
+      "target": "backend_app_discharge_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_health_record",
+      "target": "backend_app_init",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_health_record",
+      "target": "backend_app_health_record_push_event",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_health_record",
+      "target": "backend_app_health_record_get_timeline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_health_record_rationale_1",
+      "target": "backend_app_health_record",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "hashlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_init",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_insurance_connect_hash_int",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_insurance_connect_insurer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_insurance_connect_policy_number",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_insurance_connect_check_eligibility",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_insurance_connect_submit_claim",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_insurance_connect_get_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_insurer",
+      "target": "backend_app_insurance_connect_hash_int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_policy_number",
+      "target": "backend_app_insurance_connect_hash_int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_check_eligibility",
+      "target": "backend_app_insurance_connect_insurer",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_check_eligibility",
+      "target": "backend_app_insurance_connect_policy_number",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_check_eligibility",
+      "target": "backend_app_insurance_connect_hash_int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_submit_claim",
+      "target": "backend_app_insurance_connect_insurer",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_submit_claim",
+      "target": "backend_app_insurance_connect_policy_number",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_submit_claim",
+      "target": "backend_app_insurance_connect_hash_int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_rationale_1",
+      "target": "backend_app_insurance_connect",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_lab_ocr",
+      "target": "io",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_lab_ocr",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_lab_ocr",
+      "target": "pytesseract",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_lab_ocr",
+      "target": "pil",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_lab_ocr",
+      "target": "backend_app_lab_ocr_extract_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_lab_ocr",
+      "target": "backend_app_lab_ocr_parse_candidates",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_lab_ocr_rationale_1",
+      "target": "backend_app_lab_ocr",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/lab_ocr.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "asyncio",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "logging",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "uuid",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "fastapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "fastapi_middleware_cors",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "fastapi_responses",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "pydantic",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_init",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_init_persistence",
+      "target": "on_event",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_init_persistence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_load_beds",
+      "target": "on_event",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_load_beds",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_resume_or_admit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_start_clock",
+      "target": "on_event",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_start_clock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_start_clock",
+      "target": "backend_app_main_start_clock_clock_loop",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_update_vitals_accum",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_admit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_discharge",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L158",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_record_events",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L182",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_list_beds",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L221",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_list_beds",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L222",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_health",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L235",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_health",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L236",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_identity",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L240",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_identity",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L241",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_insurance",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L248",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_insurance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L249",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_endpoint",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L261",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_prescriptions_endpoint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L262",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_ocr",
+      "target": "post",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L271",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_prescriptions_ocr",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L272",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_ocr",
+      "target": "uploadfile",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L272",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_pending",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L296",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_prescriptions_pending",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L297",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_prescriptioncorrection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L303",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_prescriptioncorrection",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L303",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_prescription",
+      "target": "post",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L310",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_approve_pending_prescription",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L311",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_prescription",
+      "target": "backend_app_main_prescriptioncorrection",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L311",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_prescription",
+      "target": "post",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L343",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_reject_pending_prescription",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L344",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_ocr",
+      "target": "post",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L359",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_labs_ocr",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L360",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_ocr",
+      "target": "uploadfile",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L360",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_pending",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L384",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_labs_pending",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L385",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L391",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_labs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L392",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_labcorrection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L400",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_labcorrection",
+      "target": "basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L400",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_lab",
+      "target": "post",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L408",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_approve_pending_lab",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L409",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_lab",
+      "target": "backend_app_main_labcorrection",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L409",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_lab",
+      "target": "post",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L432",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_reject_pending_lab",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L433",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_discharge_summary",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L447",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_discharge_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L448",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_discharge_summary_html",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L458",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_discharge_summary_html",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L459",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_record",
+      "target": "get",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L469",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_bed_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L470",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_ws_vitals",
+      "target": "websocket",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L481",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_ws_vitals",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L482",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_ws_waveform",
+      "target": "websocket",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L510",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_ws_waveform",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L511",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_load_beds",
+      "target": "backend_app_main_resume_or_admit",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_resume_or_admit",
+      "target": "backend_app_main_admit",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_start_clock",
+      "target": "backend_app_main_start_clock_clock_loop",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_start_clock_clock_loop",
+      "target": "backend_app_main_record_events",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L120",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_record_events",
+      "target": "backend_app_main_discharge",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_record_events",
+      "target": "backend_app_main_admit",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L190",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_record_events",
+      "target": "backend_app_main_update_vitals_accum",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L203",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_prescription",
+      "target": "backend_app_main_prescriptioncorrection",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L320",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_lab",
+      "target": "backend_app_main_labcorrection",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L418",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_rationale_1",
+      "target": "backend_app_main",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_rationale_101",
+      "target": "backend_app_main_resume_or_admit",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity",
+      "target": "hashlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity",
+      "target": "vitaldb",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity",
+      "target": "backend_app_patient_identity_clinical_row",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity",
+      "target": "backend_app_patient_identity_synthetic_abha_id",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity",
+      "target": "backend_app_patient_identity_synthetic_name",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity",
+      "target": "backend_app_patient_identity_build_identity",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity_build_identity",
+      "target": "backend_app_patient_identity_clinical_row",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity_build_identity",
+      "target": "backend_app_patient_identity_synthetic_name",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity_build_identity",
+      "target": "backend_app_patient_identity_synthetic_abha_id",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_patient_identity_rationale_1",
+      "target": "backend_app_patient_identity",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/patient_identity.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescription_ocr",
+      "target": "io",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescription_ocr",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescription_ocr",
+      "target": "pytesseract",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescription_ocr",
+      "target": "pil",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescription_ocr",
+      "target": "backend_app_prescription_ocr_extract_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescription_ocr",
+      "target": "backend_app_prescription_ocr_parse_candidates",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescription_ocr_rationale_1",
+      "target": "backend_app_prescription_ocr",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescription_ocr.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescriptions",
+      "target": "backend_app_prescriptions_generate_orders",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescriptions.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_prescriptions_rationale_1",
+      "target": "backend_app_prescriptions",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/prescriptions.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source",
+      "target": "vitaldb",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source",
+      "target": "backend_app_vitals_source_bedsource",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource",
+      "target": "backend_app_vitals_source_bedsource_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource",
+      "target": "backend_app_vitals_source_bedsource_tick",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource",
+      "target": "backend_app_vitals_source_bedsource_ensure_waveform_loaded",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource",
+      "target": "backend_app_vitals_source_bedsource_waveform_window",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source",
+      "target": "backend_app_vitals_source_mask_implausible",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_mask_implausible",
+      "target": "ndarray",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source",
+      "target": "backend_app_vitals_source_forward_fill",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_forward_fill",
+      "target": "ndarray",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source",
+      "target": "backend_app_vitals_source_pick_case_ids",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource_init",
+      "target": "backend_app_vitals_source_mask_implausible",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource_init",
+      "target": "backend_app_vitals_source_forward_fill",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource_ensure_waveform_loaded",
+      "target": "backend_app_vitals_source_forward_fill",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_bedsource_waveform_window",
+      "target": "backend_app_vitals_source_bedsource_ensure_waveform_loaded",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_rationale_1",
+      "target": "backend_app_vitals_source",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_rationale_50",
+      "target": "backend_app_vitals_source_bedsource",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_vitals_source_rationale_85",
+      "target": "backend_app_vitals_source_bedsource_waveform_window",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/vitals_source.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_oxlintrc",
+      "target": "frontend_oxlintrc_schema",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_oxlintrc",
+      "target": "frontend_oxlintrc_plugins",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_oxlintrc",
+      "target": "frontend_oxlintrc_rules",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_oxlintrc_rules",
+      "target": "frontend_oxlintrc_rules_react_rules_of_hooks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_oxlintrc_rules",
+      "target": "frontend_oxlintrc_rules_react_only_export_components",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/.oxlintrc.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "frontend_package_name",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "frontend_package_private",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "frontend_package_version",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "frontend_package_type",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "frontend_package_scripts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_scripts",
+      "target": "frontend_package_scripts_dev",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_scripts",
+      "target": "frontend_package_scripts_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_scripts",
+      "target": "frontend_package_scripts_lint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_scripts",
+      "target": "frontend_package_scripts_preview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "frontend_package_dependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_dependencies",
+      "target": "frontend_package_dependencies_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "ref_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_dependencies",
+      "target": "frontend_package_dependencies_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "ref_react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "frontend_package_devdependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_devdependencies",
+      "target": "frontend_package_devdependencies_types_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "ref_types_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_devdependencies",
+      "target": "frontend_package_devdependencies_types_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "ref_types_react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_devdependencies",
+      "target": "frontend_package_devdependencies_vitejs_plugin_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "ref_vitejs_plugin_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_devdependencies",
+      "target": "frontend_package_devdependencies_oxlint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "ref_oxlint",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package_devdependencies",
+      "target": "frontend_package_devdependencies_vite",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_package",
+      "target": "ref_vite",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_patienttile",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_patientdetail",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_app",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_app_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app_app",
+      "target": "frontend_src_app_app_connect",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app_app",
+      "target": "frontend_src_app_app_connect",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_dischargesummarypanel",
+      "target": "frontend_src_dischargesummarypanel_vital_labels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/DischargeSummaryPanel.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_dischargesummarypanel",
+      "target": "frontend_src_dischargesummarypanel_dischargesummarypanel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/DischargeSummaryPanel.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_healthtimeline",
+      "target": "frontend_src_healthtimeline_type_labels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_healthtimeline",
+      "target": "frontend_src_healthtimeline_describe",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_healthtimeline",
+      "target": "frontend_src_healthtimeline_healthtimeline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_healthtimeline_healthtimeline",
+      "target": "frontend_src_healthtimeline_describe",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/HealthTimeline.jsx",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_idcard",
+      "target": "frontend_src_idcard_idcard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/IdCard.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_insurancecard",
+      "target": "frontend_src_insurancecard_status_label",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/InsuranceCard.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_insurancecard",
+      "target": "frontend_src_insurancecard_insurancecard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/InsuranceCard.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_labocr",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/LabOCR.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_labocr",
+      "target": "frontend_src_labocr_candidaterow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/LabOCR.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_labocr",
+      "target": "frontend_src_labocr_labocr",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/LabOCR.jsx",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_labresults",
+      "target": "frontend_src_labresults_labresults",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/LabResults.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_idcard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_insurancecard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_prescriptiontracker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_prescriptionocr",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_labresults",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_labocr",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_dischargesummarypanel",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_healthtimeline",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_waveformcanvas",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_patientdetail_patientdetail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail_patientdetail",
+      "target": "frontend_src_patientdetail_patientdetail_connect",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail_patientdetail",
+      "target": "frontend_src_patientdetail_patientdetail_connect",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patienttile",
+      "target": "frontend_src_patienttile_vital_labels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patienttile",
+      "target": "frontend_src_patienttile_vital_units",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patienttile",
+      "target": "frontend_src_patienttile_levelforvital",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patienttile",
+      "target": "frontend_src_patienttile_sparkline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patienttile",
+      "target": "frontend_src_patienttile_patienttile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patienttile_patienttile",
+      "target": "frontend_src_patienttile_levelforvital",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientTile.jsx",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_prescriptionocr",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PrescriptionOCR.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_prescriptionocr",
+      "target": "frontend_src_prescriptionocr_candidaterow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PrescriptionOCR.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_prescriptionocr",
+      "target": "frontend_src_prescriptionocr_prescriptionocr",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PrescriptionOCR.jsx",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_prescriptiontracker",
+      "target": "frontend_src_prescriptiontracker_status_label",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PrescriptionTracker.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_prescriptiontracker",
+      "target": "frontend_src_prescriptiontracker_prescriptiontracker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PrescriptionTracker.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_waveformcanvas",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/WaveformCanvas.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_waveformcanvas",
+      "target": "frontend_src_waveformcanvas_waveformcanvas",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/WaveformCanvas.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_waveformcanvas_waveformcanvas",
+      "target": "frontend_src_waveformcanvas_waveformcanvas_draw",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/WaveformCanvas.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_waveformcanvas_waveformcanvas",
+      "target": "frontend_src_waveformcanvas_waveformcanvas_draw",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "frontend/src/WaveformCanvas.jsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_main",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_main",
+      "target": "ref_react_dom_client",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_main",
+      "target": "frontend_src_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_main",
+      "target": "frontend_src_app",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_vite_config",
+      "target": "ref_vitejs_plugin_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/vite.config.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_vite_config",
+      "target": "ref_vite",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/vite.config.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "readme_icu_dashboard_analogue",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_architecture",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_persistence_layer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_vitaldb_data_attribution_license",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_swapping_in_mimic_iv_real_icu_data_later",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_abha_style_id_card",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_the_abha_vendor_ecosystem",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_health_record_timeline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L179",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_fast_cycle_demo_bed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L206",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_insurance_connect_simulated",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L222",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_the_abdm_vendor_ecosystem",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L247",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_indian_emr_export_company_tech_stacks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L302",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_insurance_connect_vendors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L347",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_prescription_ocr_digitization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L390",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_lab_report_ocr_digitization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L425",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_lab_report_digitization_vendors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L461",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_discharge_summary_generator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L516",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_discharge_summary_vendors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L550",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_swapping_in_a_commercial_ocr_sdk_later",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L606",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_running_locally",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L630",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_icu_dashboard_competitors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L654",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_reference_projects_this_borrows_ideas_from",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L722",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_real_world_context_infrastructure_this_demo_doesn_t_have",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L734",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_icu_dashboard_analogue",
+      "target": "readme_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L808",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_readme",
+      "target": "frontend_readme_react_vite",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_readme_react_vite",
+      "target": "frontend_readme_react_compiler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/README.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_readme_react_vite",
+      "target": "frontend_readme_expanding_the_oxlint_configuration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_patienttile_patienttile",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_app",
+      "target": "frontend_src_patientdetail_patientdetail",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_idcard_idcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_insurancecard_insurancecard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_prescriptiontracker_prescriptiontracker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_prescriptionocr_prescriptionocr",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_labresults_labresults",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_labocr_labocr",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_dischargesummarypanel_dischargesummarypanel",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_healthtimeline_healthtimeline",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_patientdetail",
+      "target": "frontend_src_waveformcanvas_waveformcanvas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/PatientDetail.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "frontend_src_main",
+      "target": "frontend_src_app_app",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary",
+      "target": "backend_app_db",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_health_record",
+      "target": "backend_app_db",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect",
+      "target": "backend_app_db",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_alerts",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_db",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_discharge_summary",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_health_record",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_insurance_connect",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_lab_ocr",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_patient_identity",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_prescription_ocr",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_prescriptions",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_vitals_source",
+      "relation": "imports_from",
+      "context": "submodule_import",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/main.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary_build",
+      "target": "backend_app_db_insert_discharge_summary",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_discharge_summary_latest",
+      "target": "backend_app_db_latest_discharge_summary",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/discharge_summary.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_health_record_push_event",
+      "target": "backend_app_db_push_health_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_health_record_get_timeline",
+      "target": "backend_app_db_get_health_timeline",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/health_record.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_check_eligibility",
+      "target": "backend_app_db_get_insurance_record",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_check_eligibility",
+      "target": "backend_app_db_upsert_insurance_eligibility",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_submit_claim",
+      "target": "backend_app_db_get_insurance_record",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_submit_claim",
+      "target": "backend_app_db_upsert_insurance_claim",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_insurance_connect_get_record",
+      "target": "backend_app_db_get_insurance_record",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/insurance_connect.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_init_persistence",
+      "target": "backend_app_db_init_db",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_init_persistence",
+      "target": "backend_app_db_get_state",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_load_beds",
+      "target": "backend_app_vitals_source_pick_case_ids",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_load_beds",
+      "target": "backend_app_vitals_source_bedsource",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_load_beds",
+      "target": "backend_app_patient_identity_build_identity",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_resume_or_admit",
+      "target": "backend_app_db_get_prescriptions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_update_vitals_accum",
+      "target": "backend_app_db_get_bed_runtime",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_update_vitals_accum",
+      "target": "backend_app_db_set_bed_vitals_accum",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L134",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_admit",
+      "target": "backend_app_db_set_bed_admit_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_admit",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_admit",
+      "target": "backend_app_insurance_connect_check_eligibility",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L143",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_admit",
+      "target": "backend_app_prescriptions_generate_orders",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L148",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_admit",
+      "target": "backend_app_db_insert_prescriptions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_discharge",
+      "target": "backend_app_db_get_bed_runtime",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_discharge",
+      "target": "backend_app_health_record_get_timeline",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_discharge",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_discharge",
+      "target": "backend_app_insurance_connect_submit_claim",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_discharge",
+      "target": "backend_app_db_discontinue_prescriptions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L172",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_discharge",
+      "target": "backend_app_discharge_summary_build",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L176",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_record_events",
+      "target": "backend_app_db_get_active_prescriptions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L194",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_record_events",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L196",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_record_events",
+      "target": "backend_app_db_mark_prescription_administered",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L200",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_record_events",
+      "target": "backend_app_alerts_evaluate",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L204",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_insurance",
+      "target": "backend_app_insurance_connect_get_record",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L253",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_endpoint",
+      "target": "backend_app_db_get_prescriptions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L267",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_ocr",
+      "target": "backend_app_prescription_ocr_extract_text",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L279",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_ocr",
+      "target": "backend_app_prescription_ocr_parse_candidates",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L283",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_ocr",
+      "target": "backend_app_db_add_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L286",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_ocr",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L289",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_prescriptions_pending",
+      "target": "backend_app_db_get_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L300",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_prescription",
+      "target": "backend_app_db_get_pending_item",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L315",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_prescription",
+      "target": "backend_app_db_remove_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L318",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_prescription",
+      "target": "backend_app_db_insert_prescriptions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L335",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_prescription",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L336",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_prescription",
+      "target": "backend_app_db_get_pending_item",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L348",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_prescription",
+      "target": "backend_app_db_remove_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L351",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_prescription",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L352",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_ocr",
+      "target": "backend_app_lab_ocr_extract_text",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L367",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_ocr",
+      "target": "backend_app_lab_ocr_parse_candidates",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L371",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_ocr",
+      "target": "backend_app_db_add_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L374",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_ocr",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L377",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs_pending",
+      "target": "backend_app_db_get_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L388",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_labs",
+      "target": "backend_app_health_record_get_timeline",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L396",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_lab",
+      "target": "backend_app_db_get_pending_item",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L413",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_lab",
+      "target": "backend_app_db_remove_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L416",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_approve_pending_lab",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L428",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_lab",
+      "target": "backend_app_db_get_pending_item",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L437",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_lab",
+      "target": "backend_app_db_remove_pending",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L440",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_reject_pending_lab",
+      "target": "backend_app_health_record_push_event",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L441",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_discharge_summary",
+      "target": "backend_app_discharge_summary_latest",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L452",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_discharge_summary_html",
+      "target": "backend_app_discharge_summary_latest",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L463",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_discharge_summary_html",
+      "target": "backend_app_discharge_summary_render_html",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L466",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_bed_record",
+      "target": "backend_app_health_record_get_timeline",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L477",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "backend_app_main_ws_vitals",
+      "target": "backend_app_alerts_evaluate",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L499",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "directed": false
+}

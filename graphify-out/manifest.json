@@ -1,0 +1,230 @@
+{
+  ".claude/launch.json": {
+    "mtime": 1789603074.4111855,
+    "seen": 1789968726.739637,
+    "ast_hash": "a742f5b2255d41e70917ad4e717d8eac",
+    "semantic_hash": ""
+  },
+  "backend/app/__init__.py": {
+    "mtime": 1789602885.9589517,
+    "seen": 1789968726.739676,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "backend/app/alerts.py": {
+    "mtime": 1789603122.4820073,
+    "seen": 1789968726.739691,
+    "ast_hash": "90807c6945368f450a9b85b5ecad96d8",
+    "semantic_hash": ""
+  },
+  "backend/app/db.py": {
+    "mtime": 1789724782.3886054,
+    "seen": 1789968726.739697,
+    "ast_hash": "c06e0f645de3c139c7dadf55438f475f",
+    "semantic_hash": ""
+  },
+  "backend/app/discharge_summary.py": {
+    "mtime": 1789724829.2873223,
+    "seen": 1789968726.739702,
+    "ast_hash": "f2f7ef499fb02b6baed2a51b8c40e2e8",
+    "semantic_hash": ""
+  },
+  "backend/app/health_record.py": {
+    "mtime": 1789724791.3892648,
+    "seen": 1789968726.739706,
+    "ast_hash": "6a9964f34dcf13d50a91f0dfccbc96d5",
+    "semantic_hash": ""
+  },
+  "backend/app/insurance_connect.py": {
+    "mtime": 1789724806.9796128,
+    "seen": 1789968726.739711,
+    "ast_hash": "f9ba16cb86e911ecb14558292bb84eff",
+    "semantic_hash": ""
+  },
+  "backend/app/lab_ocr.py": {
+    "mtime": 1789710229.6537511,
+    "seen": 1789968726.739716,
+    "ast_hash": "44a1dafccff94c70737ee72cae7ed16f",
+    "semantic_hash": ""
+  },
+  "backend/app/main.py": {
+    "mtime": 1789724916.1194224,
+    "seen": 1789968726.739721,
+    "ast_hash": "3226bd0bd41009aac5e7e5fe2e46cc7e",
+    "semantic_hash": ""
+  },
+  "backend/app/patient_identity.py": {
+    "mtime": 1789603441.154398,
+    "seen": 1789968726.739725,
+    "ast_hash": "173ded3a1752948d22af110205557225",
+    "semantic_hash": ""
+  },
+  "backend/app/prescription_ocr.py": {
+    "mtime": 1789708736.4186873,
+    "seen": 1789968726.739729,
+    "ast_hash": "681f35edeb2576836e50567e4ff9c3d6",
+    "semantic_hash": ""
+  },
+  "backend/app/prescriptions.py": {
+    "mtime": 1789604196.4472306,
+    "seen": 1789968726.7397351,
+    "ast_hash": "aa4ac59de1ec01a108d321895a1dd840",
+    "semantic_hash": ""
+  },
+  "backend/app/vitals_source.py": {
+    "mtime": 1789604992.2220318,
+    "seen": 1789968726.739739,
+    "ast_hash": "9d8f504b932e54b745f902f83398f243",
+    "semantic_hash": ""
+  },
+  "frontend/.oxlintrc.json": {
+    "mtime": 1789602943.9962919,
+    "seen": 1789968726.739743,
+    "ast_hash": "5e6e3cea3e89137071c142dd7835b0ef",
+    "semantic_hash": ""
+  },
+  "frontend/package.json": {
+    "mtime": 1789602943.998632,
+    "seen": 1789968726.739747,
+    "ast_hash": "0aad932d75966fcc7fc6658c11731fd0",
+    "semantic_hash": ""
+  },
+  "frontend/src/App.jsx": {
+    "mtime": 1789603637.9335566,
+    "seen": 1789968726.7397509,
+    "ast_hash": "ed9501a5a9354136332d7f4f7cb834ba",
+    "semantic_hash": ""
+  },
+  "frontend/src/DischargeSummaryPanel.jsx": {
+    "mtime": 1789710426.0373998,
+    "seen": 1789968726.739755,
+    "ast_hash": "a51fa9aa7ef3de5795d85e547dff9904",
+    "semantic_hash": ""
+  },
+  "frontend/src/HealthTimeline.jsx": {
+    "mtime": 1789710400.9908442,
+    "seen": 1789968726.7397602,
+    "ast_hash": "669eec253058b221c1a1201dfc29bce5",
+    "semantic_hash": ""
+  },
+  "frontend/src/IdCard.jsx": {
+    "mtime": 1789603600.6247773,
+    "seen": 1789968726.739764,
+    "ast_hash": "522b897686de833fd3bbef3602d35533",
+    "semantic_hash": ""
+  },
+  "frontend/src/InsuranceCard.jsx": {
+    "mtime": 1789603946.1218624,
+    "seen": 1789968726.739769,
+    "ast_hash": "f64220bb2f996fe6f54cbdef34c1dcd2",
+    "semantic_hash": ""
+  },
+  "frontend/src/LabOCR.jsx": {
+    "mtime": 1789710369.226236,
+    "seen": 1789968726.739773,
+    "ast_hash": "2375c6a507e435d9772958ea14fc8bcc",
+    "semantic_hash": ""
+  },
+  "frontend/src/LabResults.jsx": {
+    "mtime": 1789710374.6880836,
+    "seen": 1789968726.739777,
+    "ast_hash": "488ba8de4bed304d9c50d358d98b2746",
+    "semantic_hash": ""
+  },
+  "frontend/src/PatientDetail.jsx": {
+    "mtime": 1789710391.2854865,
+    "seen": 1789968726.739834,
+    "ast_hash": "3a49e6084e687c6f4f1774647a87bc27",
+    "semantic_hash": ""
+  },
+  "frontend/src/PatientTile.jsx": {
+    "mtime": 1789604306.6191297,
+    "seen": 1789968726.739841,
+    "ast_hash": "7571d4158186a785a11a04c7ec5e89a8",
+    "semantic_hash": ""
+  },
+  "frontend/src/PrescriptionOCR.jsx": {
+    "mtime": 1789708874.6415377,
+    "seen": 1789968726.739847,
+    "ast_hash": "e10c10ee1189e82a31e7d5418946066d",
+    "semantic_hash": ""
+  },
+  "frontend/src/PrescriptionTracker.jsx": {
+    "mtime": 1789708922.4083388,
+    "seen": 1789968726.739851,
+    "ast_hash": "cd14fa30d7276c80bf6df05ef583f53f",
+    "semantic_hash": ""
+  },
+  "frontend/src/WaveformCanvas.jsx": {
+    "mtime": 1789603589.5483162,
+    "seen": 1789968726.7398558,
+    "ast_hash": "6ac6353eebd2a5e29e046a267ef24823",
+    "semantic_hash": ""
+  },
+  "frontend/src/main.jsx": {
+    "mtime": 1789602943.9983714,
+    "seen": 1789968726.739861,
+    "ast_hash": "e13723e2574429d9a6d849727e3ff695",
+    "semantic_hash": ""
+  },
+  "frontend/vite.config.js": {
+    "mtime": 1789602943.998497,
+    "seen": 1789968726.739866,
+    "ast_hash": "5d54447744c19ccd28638a5c668d15ea",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1789725207.6226728,
+    "seen": 1789968726.7398698,
+    "ast_hash": "b9ba5393afc8d5cca32fe4c21fac22a6",
+    "semantic_hash": ""
+  },
+  "backend/requirements.txt": {
+    "mtime": 1789708720.1225066,
+    "seen": 1789968726.739875,
+    "ast_hash": "fd689fef2a2038d7d1d449ece509f010",
+    "semantic_hash": ""
+  },
+  "frontend/README.md": {
+    "mtime": 1789602943.9959695,
+    "seen": 1789968726.739879,
+    "ast_hash": "75eb386f17caf77fd6fe3ce1d90968ee",
+    "semantic_hash": ""
+  },
+  "frontend/index.html": {
+    "mtime": 1789602943.9964235,
+    "seen": 1789968726.7398841,
+    "ast_hash": "89150e536c4a99f73625f46f41f0f437",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon.svg": {
+    "mtime": 1789602943.9966707,
+    "seen": 1789968726.7398882,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": ""
+  },
+  "frontend/public/icons.svg": {
+    "mtime": 1789602943.9968517,
+    "seen": 1789968726.739892,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": ""
+  },
+  "frontend/src/assets/hero.png": {
+    "mtime": 1789602943.9974496,
+    "seen": 1789968726.739896,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": ""
+  },
+  "frontend/src/assets/react.svg": {
+    "mtime": 1789602943.997799,
+    "seen": 1789968726.7399008,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": ""
+  },
+  "frontend/src/assets/vite.svg": {
+    "mtime": 1789602943.9979608,
+    "seen": 1789968726.739905,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  }
+}
