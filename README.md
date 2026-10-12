@@ -1,5 +1,9 @@
 # ICU Dashboard Analogue
 
+<!-- how-to-use-with-ai -->
+> **New here?** See [How to use this repo with AI (Claude, Gemini, ChatGPT)](HOW_TO_USE_WITH_AI.md) — clone it, paste it into an AI tool, and ask in plain English.
+
+
 An open-source stand-in for commercial ICU-aggregation dashboards
 (e.g. vTitan's Jeevantra/IntelliICU, Etiometry, Dozee, AcuteCare.ai
 CritIS): a device-integration layer that streams live vitals into a
