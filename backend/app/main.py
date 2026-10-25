@@ -312,7 +312,7 @@ def approve_pending_prescription(bed_id: str, item_id: str, correction: Prescrip
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "prescription")
+    match = db.get_pending_item(item_id, "prescription", bed_id)
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
     db.remove_pending(item_id)
@@ -345,7 +345,7 @@ def reject_pending_prescription(bed_id: str, item_id: str):
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "prescription")
+    match = db.get_pending_item(item_id, "prescription", bed_id)
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
     db.remove_pending(item_id)
@@ -410,7 +410,7 @@ def approve_pending_lab(bed_id: str, item_id: str, correction: LabCorrection = B
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "lab")
+    match = db.get_pending_item(item_id, "lab", bed_id)
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
     db.remove_pending(item_id)
@@ -434,7 +434,7 @@ def reject_pending_lab(bed_id: str, item_id: str):
     identity = bed_identities.get(bed_id)
     if identity is None:
         raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "lab")
+    match = db.get_pending_item(item_id, "lab", bed_id)
     if match is None:
         raise HTTPException(status_code=404, detail="unknown pending item")
     db.remove_pending(item_id)

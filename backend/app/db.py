@@ -265,9 +265,12 @@ def get_pending(bed_id: str, kind: str) -> list[dict]:
     return out
 
 
-def get_pending_item(item_id: str, kind: str) -> dict | None:
+def get_pending_item(item_id: str, kind: str, bed_id: str) -> dict | None:
+    """Look up a candidate only within the bed it was scanned for, so one
+    bed's URL can never approve another patient's OCR candidate."""
     row = get_conn().execute(
-        "SELECT payload_json FROM ocr_pending WHERE id = ? AND kind = ?", (item_id, kind)
+        "SELECT payload_json FROM ocr_pending WHERE id = ? AND kind = ? AND bed_id = ?",
+        (item_id, kind, bed_id),
     ).fetchone()
     if row is None:
         return None
