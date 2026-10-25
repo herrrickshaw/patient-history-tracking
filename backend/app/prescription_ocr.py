@@ -39,7 +39,9 @@ FREQUENCY_MAP = {
     "SOS": None,
 }
 FREQUENCY_PATTERN = re.compile(r"\b(" + "|".join(FREQUENCY_MAP) + r")\b", re.IGNORECASE)
-ROUTE_PATTERN = re.compile(r"\b(PO|IV|IM|SC|SL|PR|IV infusion)\b", re.IGNORECASE)
+# Longest alternative first: regex alternation takes the first that matches,
+# so "IV" listed before "IV infusion" made the latter unreachable.
+ROUTE_PATTERN = re.compile(r"\b(IV infusion|PO|IV|IM|SC|SL|PR)\b", re.IGNORECASE)
 DOSE_PATTERN = re.compile(r"\b(\d+(?:\.\d+)?\s?(?:mg|mcg|g|ml|iu|units?))\b", re.IGNORECASE)
 
 
