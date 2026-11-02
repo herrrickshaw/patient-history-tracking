@@ -258,6 +258,48 @@ def bed_insurance(bed_id: str):
     }
 
 
+def _require_identity(bed_id: str) -> dict:
+    """Return the bed's identity card or raise 404 (shared by the OCR review endpoints)."""
+    identity = bed_identities.get(bed_id)
+    if identity is None:
+        raise HTTPException(status_code=404, detail="unknown bed_id")
+    return identity
+
+
+def _pop_pending(item_id: str, kind: str) -> dict:
+    """Remove and return a pending OCR candidate of `kind`, or raise 404."""
+    match = db.get_pending_item(item_id, kind)
+    if match is None:
+        raise HTTPException(status_code=404, detail="unknown pending item")
+    db.remove_pending(item_id)
+    return match
+
+
+async def _digitize_upload(bed_id: str, file: UploadFile, ocr, kind: str, event_type: str) -> dict:
+    """OCR an uploaded image, queue each parsed candidate for review, log to the timeline.
+
+    `ocr` is a module exposing extract_text/parse_candidates/DISCLAIMER (prescription_ocr or lab_ocr).
+    """
+    identity = _require_identity(bed_id)
+    image_bytes = await file.read()
+    try:
+        raw_text = ocr.extract_text(image_bytes)
+    except Exception as exc:  # pytesseract/PIL raise on unreadable/corrupt images
+        raise HTTPException(status_code=400, detail=f"could not read image: {exc}") from exc
+
+    candidates = ocr.parse_candidates(raw_text)
+    for c in candidates:
+        item_id = uuid.uuid4().hex[:8]
+        db.add_pending(item_id, bed_id, kind, c)
+        c["id"] = item_id
+
+    health_record.push_event(
+        identity["abha_id"], event_type, source=bed_id, sim_t=sim_t,
+        payload={"candidate_count": len(candidates)},
+    )
+    return {"disclaimer": ocr.DISCLAIMER, "raw_text": raw_text, "candidates": candidates}
+
+
 @app.get("/api/beds/{bed_id}/prescriptions")
 def bed_prescriptions_endpoint(bed_id: str):
     if bed_id not in beds:
@@ -270,27 +312,7 @@ def bed_prescriptions_endpoint(bed_id: str):
 
 @app.post("/api/beds/{bed_id}/prescriptions/ocr")
 async def bed_prescriptions_ocr(bed_id: str, file: UploadFile = File(...)):
-    identity = bed_identities.get(bed_id)
-    if identity is None:
-        raise HTTPException(status_code=404, detail="unknown bed_id")
-
-    image_bytes = await file.read()
-    try:
-        raw_text = prescription_ocr.extract_text(image_bytes)
-    except Exception as exc:  # pytesseract/PIL raise on unreadable/corrupt images
-        raise HTTPException(status_code=400, detail=f"could not read image: {exc}") from exc
-
-    candidates = prescription_ocr.parse_candidates(raw_text)
-    for c in candidates:
-        item_id = uuid.uuid4().hex[:8]
-        db.add_pending(item_id, bed_id, "prescription", c)
-        c["id"] = item_id
-
-    health_record.push_event(
-        identity["abha_id"], "prescription_ocr_digitized", source=bed_id, sim_t=sim_t,
-        payload={"candidate_count": len(candidates)},
-    )
-    return {"disclaimer": prescription_ocr.DISCLAIMER, "raw_text": raw_text, "candidates": candidates}
+    return await _digitize_upload(bed_id, file, prescription_ocr, "prescription", "prescription_ocr_digitized")
 
 
 @app.get("/api/beds/{bed_id}/prescriptions/pending")
@@ -309,13 +331,8 @@ class PrescriptionCorrection(BaseModel):
 
 @app.post("/api/beds/{bed_id}/prescriptions/pending/{item_id}/approve")
 def approve_pending_prescription(bed_id: str, item_id: str, correction: PrescriptionCorrection = Body(default=None)):
-    identity = bed_identities.get(bed_id)
-    if identity is None:
-        raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "prescription")
-    if match is None:
-        raise HTTPException(status_code=404, detail="unknown pending item")
-    db.remove_pending(item_id)
+    identity = _require_identity(bed_id)
+    match = _pop_pending(item_id, "prescription")
 
     correction = correction or PrescriptionCorrection()
     drug = correction.drug or match["drug"]
@@ -342,13 +359,8 @@ def approve_pending_prescription(bed_id: str, item_id: str, correction: Prescrip
 
 @app.post("/api/beds/{bed_id}/prescriptions/pending/{item_id}/reject")
 def reject_pending_prescription(bed_id: str, item_id: str):
-    identity = bed_identities.get(bed_id)
-    if identity is None:
-        raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "prescription")
-    if match is None:
-        raise HTTPException(status_code=404, detail="unknown pending item")
-    db.remove_pending(item_id)
+    identity = _require_identity(bed_id)
+    match = _pop_pending(item_id, "prescription")
     health_record.push_event(
         identity["abha_id"], "prescription_ocr_rejected", source=bed_id, sim_t=sim_t,
         payload={"raw_line": match["raw_line"]},
@@ -358,27 +370,7 @@ def reject_pending_prescription(bed_id: str, item_id: str):
 
 @app.post("/api/beds/{bed_id}/labs/ocr")
 async def bed_labs_ocr(bed_id: str, file: UploadFile = File(...)):
-    identity = bed_identities.get(bed_id)
-    if identity is None:
-        raise HTTPException(status_code=404, detail="unknown bed_id")
-
-    image_bytes = await file.read()
-    try:
-        raw_text = lab_ocr.extract_text(image_bytes)
-    except Exception as exc:
-        raise HTTPException(status_code=400, detail=f"could not read image: {exc}") from exc
-
-    candidates = lab_ocr.parse_candidates(raw_text)
-    for c in candidates:
-        item_id = uuid.uuid4().hex[:8]
-        db.add_pending(item_id, bed_id, "lab", c)
-        c["id"] = item_id
-
-    health_record.push_event(
-        identity["abha_id"], "lab_report_digitized", source=bed_id, sim_t=sim_t,
-        payload={"candidate_count": len(candidates)},
-    )
-    return {"disclaimer": lab_ocr.DISCLAIMER, "raw_text": raw_text, "candidates": candidates}
+    return await _digitize_upload(bed_id, file, lab_ocr, "lab", "lab_report_digitized")
 
 
 @app.get("/api/beds/{bed_id}/labs/pending")
@@ -407,13 +399,8 @@ class LabCorrection(BaseModel):
 
 @app.post("/api/beds/{bed_id}/labs/pending/{item_id}/approve")
 def approve_pending_lab(bed_id: str, item_id: str, correction: LabCorrection = Body(default=None)):
-    identity = bed_identities.get(bed_id)
-    if identity is None:
-        raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "lab")
-    if match is None:
-        raise HTTPException(status_code=404, detail="unknown pending item")
-    db.remove_pending(item_id)
+    identity = _require_identity(bed_id)
+    match = _pop_pending(item_id, "lab")
 
     correction = correction or LabCorrection()
     result = {
@@ -431,13 +418,8 @@ def approve_pending_lab(bed_id: str, item_id: str, correction: LabCorrection = B
 
 @app.post("/api/beds/{bed_id}/labs/pending/{item_id}/reject")
 def reject_pending_lab(bed_id: str, item_id: str):
-    identity = bed_identities.get(bed_id)
-    if identity is None:
-        raise HTTPException(status_code=404, detail="unknown bed_id")
-    match = db.get_pending_item(item_id, "lab")
-    if match is None:
-        raise HTTPException(status_code=404, detail="unknown pending item")
-    db.remove_pending(item_id)
+    identity = _require_identity(bed_id)
+    match = _pop_pending(item_id, "lab")
     health_record.push_event(
         identity["abha_id"], "lab_result_rejected", source=bed_id, sim_t=sim_t, payload={"raw_line": match["raw_line"]},
     )
