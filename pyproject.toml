@@ -1,0 +1,17 @@
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["backend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+# Long docstring/SQL lines are existing style; zip(strict=) needs py3.10 semantics we do not rely on.
+ignore = ["E501", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+# FastAPI's Body()/File() defaults are the framework's idiom.
+"backend/app/main.py" = ["B008"]
