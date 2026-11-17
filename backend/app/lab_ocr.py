@@ -35,11 +35,15 @@ KNOWN_TESTS = [
 ]
 _TEST_PATTERN = re.compile(r"\b(" + "|".join(re.escape(t) for t in KNOWN_TESTS) + r")\b", re.IGNORECASE)
 
+# A number may carry thousands separators, Western (250,000) or Indian
+# (2,50,000) - common for platelet counts. Commas are stripped on use.
+_NUM = r"\d{1,3}(?:,\d{2,3})+(?:\.\d+)?|\d+(?:\.\d+)?"
+
 VALUE_PATTERN = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(g/dL|mg/dL|mmol/L|mEq/L|IU/L|U/L|%|x10\^?9/L|/µL|K/µL)?",
+    r"(" + _NUM + r")\s*(g/dL|mg/dL|mmol/L|mEq/L|IU/L|U/L|%|x10\^?9/L|/µL|K/µL)?",
     re.IGNORECASE,
 )
-RANGE_PATTERN = re.compile(r"\(\s*(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\s*\)")
+RANGE_PATTERN = re.compile(r"\(\s*(" + _NUM + r")\s*-\s*(" + _NUM + r")\s*\)")
 FLAG_TEXT_PATTERN = re.compile(r"\b(HIGH|LOW|NORMAL|ABNORMAL|CRITICAL)\b", re.IGNORECASE)
 
 
@@ -64,10 +68,11 @@ def parse_candidates(raw_text: str) -> list[dict]:
         range_match = RANGE_PATTERN.search(line)
         flag_text_match = FLAG_TEXT_PATTERN.search(line)
 
-        value = value_match.group(1) if value_match else None
+        value = value_match.group(1).replace(",", "") if value_match else None
         flag = None
         if value is not None and range_match:
-            lo, hi = float(range_match.group(1)), float(range_match.group(2))
+            lo = float(range_match.group(1).replace(",", ""))
+            hi = float(range_match.group(2).replace(",", ""))
             v = float(value)
             flag = "low" if v < lo else "high" if v > hi else "normal"
         elif flag_text_match:
