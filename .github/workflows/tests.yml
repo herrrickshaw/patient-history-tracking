@@ -1,0 +1,27 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # vitaldb (network dataset client) is faked in tests/conftest.py, and pytesseract is
+      # patched, so neither the dataset client nor the tesseract binary is needed here.
+      - name: Install dependencies
+        run: pip install pytest pytest-cov pytest-randomly httpx fastapi numpy pytesseract Pillow python-multipart
+      - name: Run tests with coverage
+        run: pytest backend/tests --cov --cov-config=backend/.coveragerc --cov-report=xml --cov-report=term-missing
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.xml
+          fail_ci_if_error: false
