@@ -1,6 +1,6 @@
 fastapi>=0.115
 uvicorn[standard]>=0.30
-vitaldb>=1.4
+vitaldb>=1.7.2
 numpy>=1.26
 websockets>=12.0
 pytesseract>=0.3.10
