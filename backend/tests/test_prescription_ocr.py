@@ -81,3 +81,16 @@ def test_iv_infusion_route_recognised_as_a_whole():
     never match; "IV infusion" is truncated to "IV" and the word is left in the drug name."""
     c = one("Normal Saline 100 ml iv infusion")
     assert c["route"] == "IV INFUSION"
+
+
+def test_three_character_line_is_kept_but_two_is_skipped():
+    assert po.parse_candidates("PRN")[0]["frequency_abbrev"] == "PRN"
+    assert po.parse_candidates("PR") == []
+
+
+def test_frequency_table_pins_the_documented_demo_cadences():
+    # Characterisation of the illustrative compressed schedule (sim-seconds).
+    assert po.FREQUENCY_MAP == {
+        "OD": 120, "QD": 120, "BD": 90, "BID": 90, "TDS": 60, "TID": 60,
+        "QID": 45, "QDS": 45, "HS": 150, "STAT": None, "PRN": None, "SOS": None,
+    }

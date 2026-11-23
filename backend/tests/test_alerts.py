@@ -61,3 +61,9 @@ def test_multiple_alerts_follow_rule_order():
     assert [a["vital"] for a in evaluate(vals)] == IDS
     reversed_input = dict(reversed(list(vals.items())))
     assert [a["vital"] for a in evaluate(reversed_input)] == IDS
+
+
+def test_zero_reading_is_a_value_not_a_missing_one():
+    # 0 is falsy but is a real (critical-low) reading, unlike None.
+    out = evaluate({"HR": 0})
+    assert [(a["vital"], a["level"]) for a in out] == [("HR", "critical")]

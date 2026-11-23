@@ -137,3 +137,10 @@ def test_pick_case_ids_even_spacing_and_guard(vitaldb_fake, monkeypatch):
     assert vs.pick_case_ids(3) == [1, 2, 3]  # step floors to 1
     with pytest.raises(RuntimeError, match="only 4 cases"):
         vs.pick_case_ids(5)
+
+
+def test_temperature_mask_keeps_febrile_values_and_drops_probe_dropout():
+    raw = np.array([[41.5], [15.0], [30.0], [42.0]])
+    out = vs._mask_implausible(raw, ["TEMP"])
+    assert out[0, 0] == 41.5 and out[2, 0] == 30.0 and out[3, 0] == 42.0
+    assert np.isnan(out[1, 0])

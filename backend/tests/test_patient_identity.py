@@ -50,3 +50,11 @@ def test_missing_clinical_row_gives_none_fields(vitaldb_fake, monkeypatch):
     ident = pi.build_identity("Bed-X", 3)
     assert all(ident[k] is None for k in ("age", "sex", "department", "procedure", "diagnosis", "asa_class"))
     assert ident["name"] == pi._synthetic_name(3)
+
+
+def test_abha_digits_are_the_first_fourteen_digits_of_the_seeded_hash():
+    import hashlib
+
+    digest = hashlib.sha256(b"demo-abha-42").hexdigest()
+    digits = "".join(c for c in digest if c.isdigit())[:14]
+    assert pi._synthetic_abha_id(42).replace("-", "") == digits

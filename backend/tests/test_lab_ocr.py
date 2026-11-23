@@ -96,3 +96,8 @@ def test_extract_text_decodes_image_and_calls_tesseract(monkeypatch):
 def test_extract_text_rejects_non_image_bytes():
     with pytest.raises(Exception):
         lab_ocr.extract_text(b"not an image")
+
+
+def test_three_character_analyte_line_is_kept_without_a_value():
+    out = lab_ocr.parse_candidates("TSH")
+    assert [(c["test"], c["value"]) for c in out] == [("TSH", None)]
